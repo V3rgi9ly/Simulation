@@ -1,6 +1,4 @@
-package org.example;
-
-import org.example.Creature.Creature;
+package org.example.Creature;
 
 public class Herbivore  extends Creature {
 }

@@ -1,4 +1,6 @@
-package org.example;
+package org.example.inanimateObject;
 
-public class Rock  extends Entity{
+import org.example.Entity;
+
+public class Rock  extends Entity {
 }

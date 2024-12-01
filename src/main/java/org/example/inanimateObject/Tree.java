@@ -1,4 +1,6 @@
-package org.example;
+package org.example.inanimateObject;
 
-public class Tree extends Entity{
+import org.example.Entity;
+
+public class Tree extends Entity {
 }
