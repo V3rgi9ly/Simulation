@@ -1,14 +1,18 @@
 package org.example.Creature;
 
+import org.example.Coordinates;
+
 public class Predator extends Creature {
 
 
-    public Predator(Integer speed, Integer health) {
-        super(speed, health);
+    public Predator(Integer speed, Integer health, Coordinates coordinates) {
+        super(speed, health, coordinates);
     }
 
     @Override
-    protected void makeMovement() {
+     public void makeMovement() {
 
     }
+
+
 }
