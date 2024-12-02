@@ -2,8 +2,7 @@ package org.example.Creature;
 
 import org.example.Coordinates;
 
-public class Herbivore  extends Creature {
-
+public class Herbivore extends Creature {
 
 
     public Herbivore(Integer speed, Integer health, Coordinates location) {

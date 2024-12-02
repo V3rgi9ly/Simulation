@@ -6,6 +6,7 @@ import org.example.Entity;
 public abstract class Creature extends Entity {
     protected Integer speed;
     protected Integer health;
+    protected Sprite sprite;
 
     public Coordinates coordinates;
 
