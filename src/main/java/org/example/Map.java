@@ -26,8 +26,8 @@ public class Map {
     }
 
     public void setRandomCreturePosition() {
-        setCreatures(new Coordinates(31, 2),new Predator(2, 3,new Coordinates(31, 2)));
-        setCreatures(new Coordinates(21, 6),new Herbivore(2, 3,new Coordinates(21, 6)));
+        setCreatures(new Coordinates(31, 2),new Predator(2, 3,new Coordinates(31, 2), MapField.FILLED));
+        setCreatures(new Coordinates(21, 6),new Herbivore(2, 3,new Coordinates(21, 6), MapField.FILLED));
     }
 
     public Creature getCreature(Coordinates coordinates) {

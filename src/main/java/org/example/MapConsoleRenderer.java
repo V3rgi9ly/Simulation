@@ -16,16 +16,12 @@ public class MapConsoleRenderer {
 
 
     public void renderer(Map map) {
-        for (int i = 0; i <= Map.yVertical; i++) {
+        for (int i = 0; i <=  Map.yVertical; i++) {
             String line="";
             for (int j = 0; j <= Map.xHorizontal; j++) {
                 Coordinates coordinates = new Coordinates(j, i);
-//                if (creature.coordinates.y.equals(i) && creature.coordinates.x.equals(j)) {
-//                    System.out.print(ANSI_RED_BACKGROUND + ANSI_BOXSQUARE + ANSI_RESET + lionEmoji);
-//                }
-//                System.out.print(ANSI_RED_BACKGROUND + ANSI_BOXSQUARE + ANSI_RESET);
                 if (map.isSquareEmpty(coordinates)) {
-                    line+=colorizeMap(ANSI_BOXSQUARE);
+                    line+=getEmptySprite();
                 }
                 else {
                     line+=getCreatureSprite(map.getCreature(coordinates));
@@ -34,15 +30,26 @@ public class MapConsoleRenderer {
 
             line+=ANSI_RESET;
             System.out.println(line);
+
         }
+
     }
 
-    private String colorizeMap(String sprite) {
+    private String getEmptySprite() {
+        return colorizeMap("   ", MapField.EMPTY);
+    }
+
+    private String colorizeMap(String sprite, MapField mapField) {
         String result = sprite;
 
-        result = ANSI_RED_BACKGROUND + sprite;
+        if (mapField ==MapField.EMPTY ) {
+            result = ANSI_RED_BACKGROUND + result;
+        }
+
         return result;
     }
+
+
 
     private String selectSpriteforCreatute(Creature creature) {
         switch (creature.getClass().getSimpleName()) {
@@ -55,7 +62,7 @@ public class MapConsoleRenderer {
     }
 
     private String getCreatureSprite(Creature creature) {
-        return colorizeMap(" "+selectSpriteforCreatute(creature)+" ");
+        return colorizeMap(selectSpriteforCreatute(creature)+" ",creature.mapField);
     }
 
 }

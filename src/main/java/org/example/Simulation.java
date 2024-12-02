@@ -11,7 +11,6 @@ public class Simulation {
         map.setRandomCreturePosition();
 
         MapConsoleRenderer renderer = new MapConsoleRenderer();
-        Creature creature=new Predator(2,3,new Coordinates(31,2));
         renderer.renderer(map);
     }
 }
