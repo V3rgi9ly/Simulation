@@ -8,7 +8,7 @@ public class Simulation {
     public static void main(String[] args) {
 
         Map map=new Map();
-        map.setRandomCreturePosition();
+        map.setRandomPositionObject();
 
         MapConsoleRenderer renderer = new MapConsoleRenderer();
         renderer.renderer(map);

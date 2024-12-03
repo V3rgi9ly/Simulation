@@ -1,9 +1,7 @@
 package org.example;
 
 import org.example.Creature.Creature;
-import org.example.Creature.Sprite;
-
-import java.rmi.MarshalledObject;
+import org.example.inanimateObject.InanimObject;
 
 public class MapConsoleRenderer {
 
@@ -16,15 +14,16 @@ public class MapConsoleRenderer {
 
 
     public void renderer(Map map) {
-        for (int i = 0; i <=  Map.yVertical; i++) {
+        for (int i = 0; i <  Map.yVertical; i++) {
             String line="";
-            for (int j = 0; j <= Map.xHorizontal; j++) {
+            for (int j = 0; j < Map.xHorizontal; j++) {
                 Coordinates coordinates = new Coordinates(j, i);
-                if (map.isSquareEmpty(coordinates)) {
+                if (map.isSquareEmpty(coordinates) && map.isSquareEmptyStaticObject(coordinates)) {
                     line+=getEmptySprite();
                 }
                 else {
                     line+=getCreatureSprite(map.getCreature(coordinates));
+                    line+=getStaticObjectSprite(map.getStaticObject(coordinates));
                 }
             }
 
@@ -36,15 +35,16 @@ public class MapConsoleRenderer {
     }
 
     private String getEmptySprite() {
-        return colorizeMap("   ", MapField.EMPTY);
+        return colorizeMap("", MapField.EMPTY);
     }
 
     private String colorizeMap(String sprite, MapField mapField) {
         String result = sprite;
 
         if (mapField ==MapField.EMPTY ) {
-            result = ANSI_RED_BACKGROUND + result;
+            result = ANSI_RED_BACKGROUND +ANSI_BOXSQUARE +result;
         }
+
 
         return result;
     }
@@ -61,8 +61,25 @@ public class MapConsoleRenderer {
         return "";
     }
 
+    private String selectSpriteforStaticObject(InanimObject inanimObject) {
+        switch (inanimObject.getClass().getSimpleName()) {
+            case "Rock":
+                return lionEmoji;
+            case "Tree":
+                return deerEmoji;
+            case "Grass":
+                return deciduousTree;
+        }
+        return "";
+    }
+
+    private String getStaticObjectSprite(InanimObject inanimObject) {
+        return colorizeMap(selectSpriteforStaticObject(inanimObject), inanimObject.mapField);
+    }
+
+
     private String getCreatureSprite(Creature creature) {
-        return colorizeMap(selectSpriteforCreatute(creature)+" ",creature.mapField);
+        return colorizeMap(selectSpriteforCreatute(creature),creature.mapField);
     }
 
 }

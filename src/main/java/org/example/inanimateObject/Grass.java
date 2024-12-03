@@ -1,6 +1,10 @@
 package org.example.inanimateObject;
 
-import org.example.Entity;
+import org.example.Coordinates;
+import org.example.MapField;
 
-public class Grass extends Entity {
+public class Grass extends InanimObject {
+    public Grass(Coordinates coordinates, MapField mapField) {
+        super(coordinates, mapField);
+    }
 }
