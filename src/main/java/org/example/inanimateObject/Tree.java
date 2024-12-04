@@ -5,6 +5,6 @@ import org.example.MapField;
 
 public class Tree extends InanimObject {
     public Tree(Coordinates coordinates, MapField mapField) {
-        super(coordinates, mapField);
+        super(mapField, coordinates);
     }
 }

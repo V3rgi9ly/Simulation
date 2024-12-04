@@ -14,20 +14,24 @@ public class MapConsoleRenderer {
 
 
     public void renderer(Map map) {
-        for (int i = 0; i <  Map.yVertical; i++) {
-            String line="";
+        for (int i = 0; i < Map.yVertical; i++) {
+            String line = "";
             for (int j = 0; j < Map.xHorizontal; j++) {
                 Coordinates coordinates = new Coordinates(j, i);
-                if (map.isSquareEmpty(coordinates) && map.isSquareEmptyStaticObject(coordinates)) {
+//                if (map.isSquareEmpty(coordinates) || map.isSquareEmptyStaticObject(coordinates)) {
+//                    line += getEmptySprite();
+//                } else {
+//                    line += getCreatureSprite(map.getCreature(coordinates));
+//                }
+                if (map.isSquareEmpty(coordinates)) {
                     line+=getEmptySprite();
                 }
                 else {
-                    line+=getCreatureSprite(map.getCreature(coordinates));
-                    line+=getStaticObjectSprite(map.getStaticObject(coordinates));
+                    line+=getEntitySprite(map.getEntity(coordinates));
                 }
             }
 
-            line+=ANSI_RESET;
+            line += ANSI_RESET;
             System.out.println(line);
 
         }
@@ -41,8 +45,8 @@ public class MapConsoleRenderer {
     private String colorizeMap(String sprite, MapField mapField) {
         String result = sprite;
 
-        if (mapField ==MapField.EMPTY ) {
-            result = ANSI_RED_BACKGROUND +ANSI_BOXSQUARE +result;
+        if (mapField == MapField.EMPTY) {
+            result = ANSI_RED_BACKGROUND + ANSI_BOXSQUARE + result;
         }
 
 
@@ -50,9 +54,37 @@ public class MapConsoleRenderer {
     }
 
 
+//    private String selectSpriteforCreatute(Creature creature) {
+//        switch (creature.getClass().getSimpleName()) {
+//            case "Predator":
+//                return lionEmoji;
+//            case "Herbivore":
+//                return deerEmoji;
+//        }
+//        return "";
+//    }
 
-    private String selectSpriteforCreatute(Creature creature) {
-        switch (creature.getClass().getSimpleName()) {
+//    private String selectSpriteforStaticObject(InanimObject inanimObject) {
+//        switch (inanimObject.getClass().getSimpleName()) {
+//            case "Rock":
+//                return deciduousTree;
+//        }
+//        return "";
+//    }
+
+//    private String getStaticObjectSprite(InanimObject inanimObject) {
+//        return colorizeMap(selectSpriteforStaticObject(inanimObject), inanimObject.mapField);
+//    }
+
+
+    //    private String getCreatureSprite(Creature creature) {
+//        return colorizeMap(selectSpriteforCreatute(creature),creature.mapField);
+//    }
+
+    private String selectSpriteforEntity(Entity entity) {
+        switch (entity.getClass().getSimpleName()) {
+            case "Rock":
+                return deciduousTree;
             case "Predator":
                 return lionEmoji;
             case "Herbivore":
@@ -61,25 +93,12 @@ public class MapConsoleRenderer {
         return "";
     }
 
-    private String selectSpriteforStaticObject(InanimObject inanimObject) {
-        switch (inanimObject.getClass().getSimpleName()) {
-            case "Rock":
-                return lionEmoji;
-            case "Tree":
-                return deerEmoji;
-            case "Grass":
-                return deciduousTree;
-        }
-        return "";
+    private String getEntitySprite(Entity entity) {
+        return colorizeMap(selectSpriteforEntity(entity), entity.mapField);
     }
 
-    private String getStaticObjectSprite(InanimObject inanimObject) {
-        return colorizeMap(selectSpriteforStaticObject(inanimObject), inanimObject.mapField);
-    }
-
-
-    private String getCreatureSprite(Creature creature) {
-        return colorizeMap(selectSpriteforCreatute(creature),creature.mapField);
-    }
+//    private String getEntitySprite(Creature creature) {
+//        return colorizeMap(selectSpriteforEntity(creature), creature.mapField);
+//    }
 
 }

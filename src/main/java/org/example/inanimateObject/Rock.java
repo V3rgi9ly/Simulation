@@ -5,6 +5,6 @@ import org.example.MapField;
 
 public class Rock  extends InanimObject {
     public Rock(Coordinates coordinates, MapField mapField) {
-        super(coordinates, mapField);
+        super(mapField, coordinates);
     }
 }

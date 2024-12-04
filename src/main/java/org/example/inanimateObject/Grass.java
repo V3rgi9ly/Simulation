@@ -5,6 +5,6 @@ import org.example.MapField;
 
 public class Grass extends InanimObject {
     public Grass(Coordinates coordinates, MapField mapField) {
-        super(coordinates, mapField);
+        super(mapField, coordinates);
     }
 }
