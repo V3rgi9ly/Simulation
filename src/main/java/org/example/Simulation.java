@@ -14,9 +14,7 @@ public class Simulation {
 
         MapConsoleRenderer renderer = new MapConsoleRenderer();
         renderer.renderer(map);
-//        InanimObject inanimObject=new Rock(new Coordinates(2,5), MapField.FILLED);
-//
-//        System.out.println(inanimObject.getClass().getSimpleName());
+
 
     }
 }
