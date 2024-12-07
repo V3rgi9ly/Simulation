@@ -42,6 +42,16 @@ public class Map {
         objectss.put(coordinates, entity);
     }
 
+    public void removeCreature(Coordinates coordinates) {
+        objectss.remove(coordinates);
+    }
+
+    public void moveCreature(Coordinates from, Coordinates to) {
+        Entity e=getEntity(from);
+        removeCreature(from);
+        setStaticObjects(to,e);
+    }
+
     public boolean isSquareEmpty(Coordinates coordinates) {
         return !objectss.containsKey(coordinates);
     }
