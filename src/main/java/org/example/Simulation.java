@@ -1,20 +1,15 @@
 package org.example;
 
-
-import org.example.Creature.Creature;
-import org.example.Creature.Predator;
-import org.example.inanimateObject.InanimObject;
-import org.example.inanimateObject.Rock;
-
 public class Simulation {
-    public static void main(String[] args) {
 
-        Map map=new Map();
-        map.setRandomPositionObject();
+    private final Map map;
 
-        MapConsoleRenderer renderer = new MapConsoleRenderer();
-        renderer.renderer(map);
+    private MapConsoleRenderer renderer= new MapConsoleRenderer();
 
 
+    public Simulation(Map map) {
+        this.map = map;
     }
+
+    public void
 }

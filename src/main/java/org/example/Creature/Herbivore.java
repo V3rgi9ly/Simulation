@@ -3,6 +3,8 @@ package org.example.Creature;
 import org.example.Coordinates;
 import org.example.MapField;
 
+import java.util.Set;
+
 public class Herbivore extends Creature {
 
 
@@ -10,10 +12,12 @@ public class Herbivore extends Creature {
         super(speed, health, mapField, location);
     }
 
+
     @Override
-    public void makeMovement() {
-
+    protected Set<CoordinatesShift> makeMovement() {
+        return Set.of();
     }
-
-
 }
+
+
+

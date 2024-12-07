@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.Creature.CoordinatesShift;
+
 import java.util.Objects;
 
 public class Coordinates {
@@ -9,6 +11,21 @@ public class Coordinates {
     public Coordinates(Integer x, Integer y) {
         this.x = x;
         this.y = y;
+    }
+
+
+    public Coordinates shift(CoordinatesShift coordinatesShift){
+        return new Coordinates(this.x+ coordinatesShift.xShift, this.y+coordinatesShift.yShift);
+    }
+
+    public boolean canShift(CoordinatesShift coordinatesShift){
+        int f=x+coordinatesShift.xShift;
+        int g=y+coordinatesShift.yShift;
+
+        if ((f< Map.xHorizontal) || (f>Map.xHorizontal)) return false;
+        if ((g< Map.yVertical) || (g>Map.yVertical)) return false;
+
+        return true;
     }
 
     @Override

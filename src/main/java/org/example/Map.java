@@ -32,6 +32,10 @@ public class Map {
 //        staticObjects.put(coordinates, inanimObject);
 //    }
 
+    public Map(){
+
+    }
+
 
         public void setStaticObjects(Coordinates coordinates, Entity entity) {
         entity.coordinates=coordinates;
