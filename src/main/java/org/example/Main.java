@@ -3,8 +3,8 @@ package org.example;
 
 public class Main {
     public static void main(String[] args) {
-        Map map=new Map();
-        Simulation simulation=new Simulation(map);
+        GameMap gameMap =new GameMap();
+        Simulation simulation=new Simulation(gameMap);
         simulation.nextTurn();
 //        Map map=new Map();
 //        map.setRandomPositionObject();

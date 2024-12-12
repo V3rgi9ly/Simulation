@@ -2,7 +2,7 @@ package org.example;
 
 public class Simulation {
 
-    private final Map map;
+    private final GameMap gameMap;
     private int counter;
     Actions actions=new Actions();
 
@@ -10,13 +10,13 @@ public class Simulation {
     private MapConsoleRenderer renderer= new MapConsoleRenderer();
 
 
-    public Simulation(Map map) {
-        this.map = map;
+    public Simulation(GameMap gameMap) {
+        this.gameMap = gameMap;
     }
 
     public void nextTurn(){
-        actions.initAction(map);
-        renderer.renderer(map);
+        actions.initAction(gameMap);
+        renderer.renderer(gameMap);
     }
 
     public void startSimulation() {}

@@ -1,8 +1,5 @@
 package org.example;
 
-import org.example.Creature.Creature;
-import org.example.inanimateObject.InanimObject;
-
 public class MapConsoleRenderer {
 
     public static final String ANSI_RED_BACKGROUND = "\u001B[41m";
@@ -15,16 +12,16 @@ public class MapConsoleRenderer {
     public static final String grass  = "\uD83C\uDF40";
 
 
-    public void renderer(Map map) {
-        for (int i = 0; i < Map.yVertical; i++) {
+    public void renderer(GameMap gameMap) {
+        for (int i = 0; i < GameMap.yVertical; i++) {
             String line = "";
-            for (int j = 0; j < Map.xHorizontal; j++) {
+            for (int j = 0; j < GameMap.xHorizontal; j++) {
                 Coordinates coordinates = new Coordinates(j, i);
-                if (map.isSquareEmpty(coordinates)) {
+                if (gameMap.isSquareEmpty(coordinates)) {
                     line+=getEmptySprite();
                 }
                 else {
-                    line+=getEntitySprite(map.getEntity(coordinates));
+                    line+=getEntitySprite(gameMap.getEntity(coordinates));
                 }
             }
 

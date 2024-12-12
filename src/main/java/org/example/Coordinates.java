@@ -22,8 +22,8 @@ public class Coordinates {
         int f=x+coordinatesShift.xShift;
         int g=y+coordinatesShift.yShift;
 
-        if ((f< Map.xHorizontal) || (f>Map.xHorizontal)) return false;
-        if ((g< Map.yVertical) || (g>Map.yVertical)) return false;
+        if ((f< GameMap.xHorizontal) || (f> GameMap.xHorizontal)) return false;
+        if ((g< GameMap.yVertical) || (g> GameMap.yVertical)) return false;
 
         return true;
     }
