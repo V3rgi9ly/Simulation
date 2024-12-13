@@ -46,6 +46,7 @@ public abstract class Creature extends Entity {
                         break;
                     }
                 }
+
                 if (creatureMove.coordinates==creatureGoals.coordinates){
                     break;
                 }
