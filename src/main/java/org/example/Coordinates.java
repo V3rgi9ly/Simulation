@@ -5,8 +5,8 @@ import org.example.Creature.CoordinatesShift;
 import java.util.Objects;
 
 public class Coordinates {
-    public final Integer x;
-    public final Integer y;
+    public Integer x;
+    public Integer y;
 
     public Coordinates(Integer x, Integer y) {
         this.x = x;

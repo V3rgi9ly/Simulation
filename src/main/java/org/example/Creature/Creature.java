@@ -2,10 +2,7 @@ package org.example.Creature;
 
 import org.example.*;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public abstract class Creature extends Entity {
     protected Integer speed;
@@ -28,17 +25,26 @@ public abstract class Creature extends Entity {
         this.coordinates = coordinates;
     }
 
-    public Set<Coordinates> breadthFirstSearch(GameMap map, Creature creature_start, Creature creature_goals) {
+    public Set<Coordinates> breadthFirstSearch(GameMap map, Creature creatureStart,Creature creatureMove, Creature creatureGoals) {
+        Set<Coordinates> visit = new HashSet<>();
         Set<Coordinates> path = new HashSet<>();
-        Coordinates s;
-        while (creature_start.coordinates!=creature_goals.coordinates) {
-            for (CoordinatesShift coordinatesShift : coordinatesShift) {
-                int i = creature_start.coordinates.x + coordinatesShift.xShift;
-                int j = creature_start.coordinates.y + coordinatesShift.yShift;
-                path.add(new Coordinates(i, j));
-                creature_start.coordinates=new Coordinates(i, j);
-                if (creature_start.coordinates==creature_goals.coordinates) {
 
+        for (int i=0; i<coordinatesShift.size(); i++) {
+                visit.add(new Coordinates(creatureStart.coordinates.x,creatureStart.coordinates.y ));
+        }
+
+
+        while (creatureMove.coordinates != creatureGoals.coordinates) {  //условия выполняется до тех пор пока координаты старта не равны координате цели
+            for (CoordinatesShift coordinatesShift : coordinatesShift) { // тут берется список движений который есть у объетка
+                for (Coordinates coordinates1: visit){
+                    coordinates1.x+=coordinatesShift.xShift;
+                    coordinates1.y+=coordinatesShift.yShift;
+                    path.add(new Coordinates(coordinates1.x, coordinates1.y));
+                }
+                //  creatureStart.coordinates=new Coordinates(i, j); //сюда стартовой позиции добавляем новые координаты
+                if (creatureStart.coordinates == creatureGoals.coordinates) {
+                    //Должно быть поставлено условие при котором будет выделен самый короткий путь и добавлены в список эти координаты
+                    //Найдя самый короткий путь мы сможем сет координат передать в симуляюцию чтобы по шагово воспроизводить передвижение существа.
                 }
             }
         }
