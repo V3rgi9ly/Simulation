@@ -40,11 +40,16 @@ public abstract class Creature extends Entity {
                     coordinates1.x+=coordinatesShift.xShift;
                     coordinates1.y+=coordinatesShift.yShift;
                     path.add(new Coordinates(coordinates1.x, coordinates1.y));
-                }
-                if (visit.equals(creatureGoals.coordinates)) {
-                    creatureMove.coordinates=creatureGoals.coordinates;
 
+                    if (visit.equals(creatureGoals.coordinates)) {
+                        creatureMove.coordinates=creatureGoals.coordinates;
+                        break;
+                    }
+                    if (creatureMove.coordinates==creatureGoals.coordinates){
+                        break;
+                    }
                 }
+
             }
         }
         return distance;
