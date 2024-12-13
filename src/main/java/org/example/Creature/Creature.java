@@ -25,33 +25,32 @@ public abstract class Creature extends Entity {
         this.coordinates = coordinates;
     }
 
-    public Set<Coordinates> breadthFirstSearch(GameMap map, Creature creatureStart,Creature creatureMove, Creature creatureGoals) {
+    public Set<Coordinates> breadthFirstSearch(GameMap map, Creature creatureStart, Creature creatureMove, Creature creatureGoals) {
         Set<Coordinates> visit = new HashSet<>();
         Set<Coordinates> path = new HashSet<>();
         Set<Coordinates> distance = new HashSet<>();
 
-        for (int i=0; i<coordinatesShift.size(); i++) {
-                visit.add(new Coordinates(creatureStart.coordinates.x,creatureStart.coordinates.y ));
+        for (int i = 0; i < coordinatesShift.size(); i++) {
+            visit.add(new Coordinates(creatureStart.coordinates.x, creatureStart.coordinates.y));
         }
 
-        while (creatureMove.coordinates != creatureGoals.coordinates) {  //условия выполняется до тех пор пока координаты старта не равны координате цели
-            for (CoordinatesShift coordinatesShift : coordinatesShift) { // тут берется список движений который есть у объетка
-                for (Coordinates coordinates1: visit){
-                    coordinates1.x+=coordinatesShift.xShift;
-                    coordinates1.y+=coordinatesShift.yShift;
-                    path.add(new Coordinates(coordinates1.x, coordinates1.y));
+        for (CoordinatesShift coordinatesShift : coordinatesShift) {
+            for (Coordinates coordinates1 : visit) {
+                coordinates1.x += coordinatesShift.xShift;
+                coordinates1.y += coordinatesShift.yShift;
+                path.add(new Coordinates(coordinates1.x, coordinates1.y));
 
-                    if (visit.equals(creatureGoals.coordinates)) {
-                        creatureMove.coordinates=creatureGoals.coordinates;
-                        break;
-                    }
-                }
-
-                if (creatureMove.coordinates==creatureGoals.coordinates){
+                if (visit.equals(creatureGoals.coordinates)) {
+                    creatureMove.coordinates = creatureGoals.coordinates;
                     break;
                 }
             }
+
+            if (creatureMove.coordinates == creatureGoals.coordinates) {
+                break;
+            }
         }
+
         return distance;
     }
 
