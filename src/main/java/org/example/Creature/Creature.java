@@ -45,11 +45,10 @@ public abstract class Creature extends Entity {
                         creatureMove.coordinates=creatureGoals.coordinates;
                         break;
                     }
-                    if (creatureMove.coordinates==creatureGoals.coordinates){
-                        break;
-                    }
                 }
-
+                if (creatureMove.coordinates==creatureGoals.coordinates){
+                    break;
+                }
             }
         }
         return distance;
