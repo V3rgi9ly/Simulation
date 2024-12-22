@@ -58,7 +58,8 @@ public abstract class Creature extends Entity {
                         listCoordinates.add(coordinates1);
                     }
                 }
-                queue.addAll(listCoordinates);
+                queue.addAll(Collections.singleton(getNeighbors(listCoordinates)));
+                queue.removeAll(listCoordinates);
             }
 
         }
