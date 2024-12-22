@@ -25,50 +25,54 @@ public abstract class Creature extends Entity {
         this.coordinates = coordinates;
     }
 
-    public Set<Coordinates> breadthFirstSearch(GameMap map, Creature creatureStart, Creature creatureMove, Creature creatureGoals) {
-        Set<Coordinates> visit = new HashSet<>();
-        Set<Coordinates> path = new HashSet<>();
-        Set<Coordinates> distance = new HashSet<>();
 
-
-
-        for (int i = 0; i < coordinatesShift.size(); i++) {
-            visit.add(new Coordinates(creatureStart.coordinates.x, creatureStart.coordinates.y));
+    public boolean visited(Coordinates coordinates) {
+        if (coordinates != null) {
+            return true;
         }
-        while (!(creatureMove.coordinates == creatureGoals.coordinates)) {
-            for (CoordinatesShift coordinatesShift : coordinatesShift) {
-                for (Coordinates coordinates1 : visit) {
-                    coordinates1.x += coordinatesShift.xShift;
-                    coordinates1.y += coordinatesShift.yShift;
-                    path.add(new Coordinates(coordinates1.x, coordinates1.y));
-
-                    if (visit.equals(creatureGoals.coordinates)) {
-                        creatureMove.coordinates = creatureGoals.coordinates;
-                        break;
-                    }
-                }
-
-                if (creatureMove.coordinates == creatureGoals.coordinates) {
-                    break;
-                }
-            }
-        }
-
-        return distance;
+        return false;
     }
 
-//    public Set<Coordinates> findingShortPath(Map<Coordinates, Entity> searchEntities, GameMap gameMap, Creature creature) {
-//        Set<Coordinates> path = new HashSet<>();
-//        int coordinatesX;
-//        int coordinatesY;
-//        for (Coordinates coordinates : searchEntities.keySet()) {
-//            coordinatesX = coordinates.x - creature.coordinates.x;
-//            coordinatesY = coordinates.y - creature.coordinates.y;
-//            path.add(new Coordinates(coordinatesX, coordinatesY));
-//        }
-//
-//        return path;
-//    }
+
+    public Set<Coordinates> breadthFirstSearch(Creature creatureStart, Creature creatureMove, Creature creatureGoals) {
+        Set<Coordinates> listCoordinates = new HashSet<>();
+        Queue<Coordinates> queue = new ArrayDeque<>();
+        queue.add(creatureStart.coordinates);
+
+        Coordinates currentCoordinates = creatureStart.coordinates;
+        Coordinates coordinates1 = null;
+
+        while (!queue.isEmpty()) {
+            currentCoordinates = queue.remove();
+            if (currentCoordinates.equals(creatureGoals.coordinates)) {
+                listCoordinates.add(currentCoordinates);
+                return listCoordinates;
+            } else {
+                for (Coordinates coordinates2 : queue) {
+                    currentCoordinates = coordinates2;
+                    for (CoordinatesShift coordinatesShift : coordinatesShift) {
+                        currentCoordinates.y += coordinatesShift.yShift;
+                        currentCoordinates.x += coordinatesShift.xShift;
+                        coordinates1 = new Coordinates(currentCoordinates.x, currentCoordinates.y);
+
+                        listCoordinates.add(coordinates1);
+                    }
+                }
+                queue.addAll(listCoordinates);
+            }
+
+        }
+
+        return listCoordinates;
+    }
+
+    public Coordinates getNeighbors(Set<Coordinates> coordinates) {
+        for (Coordinates coordinatesShift : coordinates) {
+
+        }
+        return (Coordinates) coordinates;
+    }
+
 
     public Set<Coordinates> getAvailableMoveCoordinates(GameMap gameMap) {
         Set<Coordinates> result = new HashSet<>();
