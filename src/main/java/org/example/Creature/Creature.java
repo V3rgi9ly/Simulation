@@ -34,9 +34,11 @@ public abstract class Creature extends Entity {
     }
 
 
-    public Set<Coordinates> breadthFirstSearch(Creature creatureStart, Creature creatureMove, Creature creatureGoals) {
+    public Set<Coordinates> breadthFirstSearch(Creature creatureStart, Creature creatureGoals) {
         Set<Coordinates> listCoordinates = new HashSet<>();
         Queue<Coordinates> queue = new ArrayDeque<>();
+        List<Boolean> visited = new ArrayList<>();
+
         queue.add(creatureStart.coordinates);
 
         Coordinates currentCoordinates = creatureStart.coordinates;
@@ -54,25 +56,35 @@ public abstract class Creature extends Entity {
                         currentCoordinates.y += coordinatesShift.yShift;
                         currentCoordinates.x += coordinatesShift.xShift;
                         coordinates1 = new Coordinates(currentCoordinates.x, currentCoordinates.y);
-
-                        listCoordinates.add(coordinates1);
+                        for (Coordinates coordinates3 : queue) {
+                            if (coordinates3.equals(coordinates1)) {
+                                visited.add(false);
+                            } else {
+                                visited.add(true);
+                                listCoordinates.add(coordinates1);
+                            }
+                        }
                     }
                 }
-                queue.addAll(Collections.singleton(getNeighbors(listCoordinates)));
-                queue.removeAll(listCoordinates);
+                queue.addAll(listCoordinates);
             }
 
         }
-
         return listCoordinates;
     }
 
-    public Coordinates getNeighbors(Set<Coordinates> coordinates) {
-        for (Coordinates coordinatesShift : coordinates) {
-
-        }
-        return (Coordinates) coordinates;
-    }
+//    public Set<Coordinates> getNeighbors(Set<Coordinates> coordinates, List<Boolean> visited) {
+//        for (Coordinates coordinatesShift : coordinates) {
+//            for (Boolean b : visited) {
+//                if (b) {
+//                    continue;
+//                } else {
+//                    continue;
+//                }
+//            }
+//        }
+//        return coordinates;
+//    }
 
 
     public Set<Coordinates> getAvailableMoveCoordinates(GameMap gameMap) {
