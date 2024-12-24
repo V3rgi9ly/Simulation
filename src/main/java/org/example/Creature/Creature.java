@@ -36,66 +36,52 @@ public abstract class Creature extends Entity {
 
     public Set<Coordinates> breadthFirstSearch(Creature creatureStart, Creature creatureGoals) {
         Set<Coordinates> listCoordinates = new HashSet<>();
-        Queue<Coordinates> queue = new ArrayDeque<>();
-//        List<Boolean> visited = new ArrayList<>();
-
-        queue.add(creatureStart.coordinates);
+//        Set<Coordinates> listBreadthFirst = new HashSet<>();
+        Queue<Coordinates> queue = new LinkedList<>();
 
         Coordinates currentCoordinates = creatureStart.coordinates;
+        queue.offer(currentCoordinates);
+        Set<Coordinates> listCoordinatesss = new HashSet<>(queue);
         Coordinates coordinates1 = null;
 
-        while (true) {
-            //currentCoordinates = queue.remove();
-
-            for (Coordinates coordinate : queue) {
-
-
-                if (coordinate.equals(creatureGoals.coordinates)) {
-                    listCoordinates.add(currentCoordinates);
-                    System.out.println("ssdd");
-
-                } else {
-                    for (Coordinates coordinates2 : queue) {
-                        currentCoordinates = coordinates2;
-                        for (CoordinatesShift coordinatesShift : coordinatesShift) {
-                            currentCoordinates.y += coordinatesShift.yShift;
-                            currentCoordinates.x += coordinatesShift.xShift;
-                            coordinates1 = new Coordinates(currentCoordinates.x, currentCoordinates.y);
-                            listCoordinates.add(coordinates1);
-
-                        }
-                        for (Coordinates coordinates3 : listCoordinates) {
-                            for (Coordinates coordinates4 : queue) {
-                                if (coordinates4.equals(coordinates3)) {
-                                    System.out.println("sdfdsf");
-                                } else {
-                                    queue.add(coordinates3);
-
-                                }
-                            }
-
-                        }
+        while (!queue.isEmpty()) {
+            for (Coordinates coordinates2 : queue) {
+                currentCoordinates = coordinates2;
+                for (CoordinatesShift coordinatesShift : coordinatesShift) {
+                    currentCoordinates.y =currentCoordinates.y+ coordinatesShift.yShift;
+                    currentCoordinates.x =currentCoordinates.x+ coordinatesShift.xShift;
+                    coordinates1 = new Coordinates(currentCoordinates.x, currentCoordinates.y);
+                    listCoordinates.add(coordinates1);
+                }
+                for (Coordinates coordinates4 : listCoordinates) {
+                    if (coordinates4.equals(coordinates2)) {
+                        System.out.println("-");
+                    } else {
+                        listCoordinatesss.add(coordinates4);
                     }
-
-
                 }
 
             }
-            return listCoordinates;
+            queue.addAll(listCoordinatesss);
+
+            for (Coordinates coordinate : queue) {
+                if (coordinate.equals(creatureGoals.coordinates)) {
+                    listCoordinates.add(currentCoordinates);
+                    System.out.println("Goal complete");
+                    queue.clear();
+                    break;
+                }
+            }
         }
+        return listCoordinates;
     }
-//    public Set<Coordinates> getNeighbors(Set<Coordinates> coordinates, List<Boolean> visited) {
-//        for (Coordinates coordinatesShift : coordinates) {
-//            for (Boolean b : visited) {
-//                if (b) {
-//                    continue;
-//                } else {
-//                    continue;
-//                }
-//            }
-//        }
-//        return coordinates;
-//    }
+
+    public Set<Coordinates> getNeighbours(Set<Coordinates> coordinates) {
+        for (Coordinates coordinate : coordinates) {
+
+        }
+        return coordinates;
+    }
 
 
     public Set<Coordinates> getAvailableMoveCoordinates(GameMap gameMap) {
