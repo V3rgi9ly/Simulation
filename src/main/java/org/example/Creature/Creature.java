@@ -38,7 +38,6 @@ public abstract class Creature extends Entity {
         coordinatesShift.add(new CoordinatesShift(0, -1));
         coordinatesShift.add(new CoordinatesShift(-1, 0));
 
-
         Coordinates currentCoordinates = creatureStart.coordinates;
         queue.offer(currentCoordinates);
         Set<Coordinates> listCoordinatesss = new HashSet<>(queue);
