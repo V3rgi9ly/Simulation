@@ -31,6 +31,7 @@ public class Predator extends Creature {
 //        )
 //
 //        );
+        return new HashSet<>(Arrays.asList());
     }
 }
 
