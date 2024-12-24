@@ -8,14 +8,7 @@ public abstract class Creature extends Entity {
     protected Integer speed;
     protected Integer health;
     public final MapField mapField;
-    protected Set<CoordinatesShift> coordinatesShift = new HashSet<>(Arrays.asList(
-            new CoordinatesShift(1, 1),
-            new CoordinatesShift(1, 0),
-            new CoordinatesShift(0, 1),
-            new CoordinatesShift(-1, -1),
-            new CoordinatesShift(0, -1),
-            new CoordinatesShift(-1, 0)
-    ));
+    protected Set<CoordinatesShift> coordinatesShift = new HashSet<>();
 
 
     protected Creature(Integer speed, Integer health, MapField mapField, Coordinates coordinates) {
@@ -36,22 +29,28 @@ public abstract class Creature extends Entity {
 
     public Set<Coordinates> breadthFirstSearch(Creature creatureStart, Creature creatureGoals) {
         Set<Coordinates> listCoordinates = new HashSet<>();
-//        Set<Coordinates> listBreadthFirst = new HashSet<>();
         Queue<Coordinates> queue = new LinkedList<>();
+
+        coordinatesShift.add(new CoordinatesShift(1, 1));
+        coordinatesShift.add(new CoordinatesShift(1, 0));
+        coordinatesShift.add(new CoordinatesShift(0, 1));
+        coordinatesShift.add(new CoordinatesShift(-1, -1));
+        coordinatesShift.add(new CoordinatesShift(0, -1));
+        coordinatesShift.add(new CoordinatesShift(-1, 0));
+
 
         Coordinates currentCoordinates = creatureStart.coordinates;
         queue.offer(currentCoordinates);
         Set<Coordinates> listCoordinatesss = new HashSet<>(queue);
-        Coordinates coordinates1 = null;
 
         while (!queue.isEmpty()) {
             for (Coordinates coordinates2 : queue) {
                 currentCoordinates = coordinates2;
                 for (CoordinatesShift coordinatesShift : coordinatesShift) {
-                    currentCoordinates.y =currentCoordinates.y+ coordinatesShift.yShift;
-                    currentCoordinates.x =currentCoordinates.x+ coordinatesShift.xShift;
-                    coordinates1 = new Coordinates(currentCoordinates.x, currentCoordinates.y);
-                    listCoordinates.add(coordinates1);
+                    currentCoordinates.x += coordinatesShift.xShift;
+                    currentCoordinates.y += coordinatesShift.yShift;
+
+                    listCoordinates.add(new Coordinates(currentCoordinates.x, currentCoordinates.y));
                 }
                 for (Coordinates coordinates4 : listCoordinates) {
                     if (coordinates4.equals(coordinates2)) {
