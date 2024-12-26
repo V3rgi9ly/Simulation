@@ -62,6 +62,7 @@ public abstract class Creature extends Entity {
             }
             queue.addAll(listCoordinatesss);
 
+
             for (Coordinates coordinate : queue) {
                 if (coordinate.equals(creatureGoals.coordinates)) {
                     listCoordinates.add(coordinate);
