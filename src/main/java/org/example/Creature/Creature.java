@@ -38,40 +38,40 @@ public abstract class Creature extends Entity {
         coordinatesShift.add(new CoordinatesShift(0, -1));
         coordinatesShift.add(new CoordinatesShift(-1, 0));
 
-        Coordinates currentCoordinates = creatureStart.coordinates;
-        queue.offer(currentCoordinates);
+        Coordinates currentCoordinates=new Coordinates(0,0);
+        queue.offer(creatureStart.coordinates);
         Set<Coordinates> listCoordinatesss = new HashSet<>(queue);
 
         while (!queue.isEmpty()) {
             for (Coordinates coordinates2 : queue) {
-                currentCoordinates = coordinates2;
+
                 for (CoordinatesShift coordinatesShift : coordinatesShift) {
-                    currentCoordinates.x += coordinatesShift.xShift;
-                    currentCoordinates.y += coordinatesShift.yShift;
+                    currentCoordinates.x +=coordinates2.x+coordinatesShift.xShift;
+                    currentCoordinates.y +=coordinates2.y+coordinatesShift.yShift;
 
                     listCoordinates.add(new Coordinates(currentCoordinates.x, currentCoordinates.y));
+
+                    currentCoordinates.x=0;
+                    currentCoordinates.y=0;
                 }
                 for (Coordinates coordinates4 : listCoordinates) {
-                    if (coordinates4.equals(coordinates2)) {
-                        System.out.println("-");
-                    } else {
+                    if (!coordinates4.equals(coordinates2)) {
                         listCoordinatesss.add(coordinates4);
                     }
                 }
-
             }
             queue.addAll(listCoordinatesss);
 
             for (Coordinates coordinate : queue) {
                 if (coordinate.equals(creatureGoals.coordinates)) {
-                    listCoordinates.add(currentCoordinates);
-                    System.out.println("Goal complete");
+                    listCoordinates.add(coordinate);
+                    System.out.println("CreateGoal finding!");
                     queue.clear();
                     break;
                 }
             }
         }
-        return listCoordinates;
+        return listCoordinatesss;
     }
 
     public Set<Coordinates> getNeighbours(Set<Coordinates> coordinates) {

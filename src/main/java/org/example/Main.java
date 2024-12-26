@@ -22,7 +22,12 @@ public class Main {
         Creature herbivore=new Herbivore(2, 3, new Coordinates(21, 6), MapField.FILLED);
 
 
-      predator.breadthFirstSearch(predator,herbivore);
+      Set<Coordinates>sd=predator.breadthFirstSearch(predator,herbivore);
+
+      for(Coordinates c:sd){
+          System.out.println(c.toString());
+      }
+
 
 
 
