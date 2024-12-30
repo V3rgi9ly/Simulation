@@ -19,7 +19,12 @@ public class Simulation {
         renderer.renderer(gameMap);
     }
 
-    public void startSimulation() {}
+    public void startSimulation() {
+        while (true){
+
+        }
+
+    }
 
     public void stopSimulation() {}
 }
