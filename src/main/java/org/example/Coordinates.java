@@ -22,9 +22,9 @@ public class Coordinates {
         int f=x+coordinatesShift.xShift;
         int g=y+coordinatesShift.yShift;
 
-        if ((f< 0) || (f> GameMap.xHorizontal)) {
+        if ((f<=0) || (f> GameMap.xHorizontal)) {
             return false;
-        } else if (g< 0 || g> GameMap.yVertical) {
+        } else if (g<=0 || g> GameMap.yVertical) {
             return false;
         }
 

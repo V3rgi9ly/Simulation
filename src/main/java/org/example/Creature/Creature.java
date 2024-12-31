@@ -26,6 +26,8 @@ public abstract class Creature extends Entity {
         if(coordinates.x<=creatureStart.coordinates.x && coordinates.y<=creatureStart.coordinates.y){
             shortestWay.add(coordinates);
         }
+
+
         return shortestWay;
     }
 
@@ -33,40 +35,22 @@ public abstract class Creature extends Entity {
     public Set<Coordinates> breadthFirstSearch(Creature creatureStart, Creature creatureGoals) {
         Set<Coordinates> listCoordinates = new HashSet<>();
         Queue<Coordinates> queue = new ArrayDeque<>();
+        Set<Coordinates> listCoordinatesss = new HashSet<>();
 
-
-//        coordinatesShift.add(new CoordinatesShift(1, 1));
         coordinatesShift.add(new CoordinatesShift(1, 0));
         coordinatesShift.add(new CoordinatesShift(0, 1));
-//        coordinatesShift.add(new CoordinatesShift(-1, -1));
         coordinatesShift.add(new CoordinatesShift(0, -1));
         coordinatesShift.add(new CoordinatesShift(-1, 0));
 
-        Coordinates currentCoordinates=new Coordinates(0,0);
-        queue.offer(creatureStart.coordinates);
-        Set<Coordinates> listCoordinatesss = new HashSet<>(queue);
+        queue.add(creatureStart.coordinates);
+
 
         while (!queue.isEmpty()) {
             for (Coordinates coordinates2 : queue) {
-
                 for (CoordinatesShift coordinatesShift : coordinatesShift) {
-
                     if (coordinates2.canShift(coordinatesShift)) {
                         listCoordinates.add(coordinates2.shift(coordinatesShift));
                     }
-//                    currentCoordinates.x +=coordinates2.x+coordinatesShift.xShift;
-//                    currentCoordinates.y +=coordinates2.y+coordinatesShift.yShift;
-//
-//                    if ()
-//
-//                    if (currentCoordinates.x<0){
-//                        currentCoordinates.x*=-1;
-//                    } else if (currentCoordinates.y<0) {
-//                        currentCoordinates.y*=-1;
-//                    }
-
-//                    currentCoordinates.x=0;
-//                    currentCoordinates.y=0;
                 }
                 for (Coordinates coordinates4 : listCoordinates) {
                     if (!coordinates4.equals(coordinates2)) {
@@ -74,17 +58,17 @@ public abstract class Creature extends Entity {
                     }
                 }
             }
+
             queue.addAll(listCoordinatesss);
-
-
             for (Coordinates coordinate : queue) {
                 if (coordinate.equals(creatureGoals.coordinates)) {
-                    listCoordinates.add(coordinate);
+                    listCoordinatesss.add(coordinate);
                     System.out.println("CreateGoal finding!");
                     queue.clear();
                     break;
                 }
             }
+
         }
         return listCoordinatesss;
     }

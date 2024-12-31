@@ -24,9 +24,9 @@ public class Main {
 
       Set<Coordinates>sd=predator.breadthFirstSearch(predator,herbivore);
 
-      for(Coordinates c:sd){
-          System.out.println(c.toString());
-      }
+        for(Coordinates c:sd){
+            System.out.println(c.toString());
+        }
 
 
 
