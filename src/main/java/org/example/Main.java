@@ -5,6 +5,8 @@ import org.example.Creature.Creature;
 import org.example.Creature.Herbivore;
 import org.example.Creature.Predator;
 
+import java.util.List;
+import java.util.Queue;
 import java.util.Set;
 
 public class Main {
@@ -22,7 +24,7 @@ public class Main {
         Creature herbivore=new Herbivore(2, 3, new Coordinates(21, 6), MapField.FILLED);
 
 
-      Set<Coordinates>sd=predator.breadthFirstSearch(predator,herbivore);
+        List<Coordinates> sd=predator.breadthFirstSearch(predator,herbivore);
 
         for(Coordinates c:sd){
             System.out.println(c.toString());

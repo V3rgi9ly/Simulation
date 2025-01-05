@@ -24,7 +24,8 @@ public class Coordinates {
 
         if ((f<=0) || (f> GameMap.xHorizontal)) {
             return false;
-        } else if (g<=0 || g> GameMap.yVertical) {
+        }
+        if (g<=0 || g> GameMap.yVertical) {
             return false;
         }
 
