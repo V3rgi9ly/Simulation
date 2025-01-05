@@ -36,7 +36,6 @@ public abstract class Creature extends Entity {
 
 
     public List<Coordinates> breadthFirstSearch(Creature creatureStart, Creature creatureGoals) {
-        List<Coordinates> listCoordinates = new ArrayList<>();
         Queue<Coordinates> queue = new ArrayDeque<>();
         List<Coordinates> sets = new ArrayList<>();
 
@@ -93,7 +92,6 @@ public abstract class Creature extends Entity {
                     }
                 }
 
-                listCoordinates.addAll(sets);
                 queue.addAll(sets);
                 sets.clear();
             }
