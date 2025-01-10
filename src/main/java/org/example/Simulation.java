@@ -21,7 +21,7 @@ public class Simulation {
 
     public void startSimulation() {
         while (true){
-
+            
         }
 
     }
