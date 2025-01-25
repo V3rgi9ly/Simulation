@@ -45,6 +45,7 @@ public class GameMap {
     }
 
 
+
     public void removeCreature(Coordinates coordinates) {
         objectss.remove(coordinates);
     }
