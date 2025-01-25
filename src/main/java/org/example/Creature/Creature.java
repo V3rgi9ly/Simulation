@@ -20,26 +20,37 @@ public abstract class Creature extends Entity {
     }
 
 
-    public Coordinates theShortestWay(List<Coordinates> listCoordinates, Creature creatureGoals) {
-        Map< Coordinates, Integer> coordinatesMap = new HashMap<>();
-        Coordinates shortestWay = null;
-        List<Integer> listSum=new ArrayList<>();
-        Random random = new Random();
+    public Coordinates theShortestWay(List<Coordinates> listCoordinates, Creature creatureGoals, Coordinates creatureCoordinatesStep) {
+        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>();
+        Map<Coordinates, Integer> coordinatesMap = new HashMap<>();
+        Coordinates shortestWay=creatureCoordinatesStep;
+        List<Coordinates> lista = new ArrayList<>();
 
-        for (Coordinates coordinates : listCoordinates) {
-            int sumCell=(coordinates.x-creatureGoals.coordinates.x)+(creatureGoals.coordinates.y - coordinates.y);
-//            coordinatesMap.put(coordinates, sumCell);
-            listSum.add(sumCell);
-        }
-
-        int min=listSum.get(0);
-
-        for (int i=0; i<listSum.size(); i++) {
-            if (listSum.get(i)<min) {
-                min=listSum.get(i);
-                shortestWay=listCoordinates.get(i);
+            for (Coordinates s : listCoordinates) {
+                for (CoordinatesShift c : coordinatesShift) {
+                    if (shortestWay.x + c.xShift == s.x && shortestWay.y + c.yShift == s.y) {
+                        lista.add(s);
+                    }
+                }
             }
-        }
+
+
+
+            for (Coordinates coordinates : lista) {
+                int sumCell =Math.abs (coordinates.x - creatureGoals.coordinates.x) + Math.abs(creatureGoals.coordinates.y - coordinates.y);
+                coordinatesMap.put(coordinates, sumCell);
+                priorityQueue.offer(sumCell);
+            }
+
+
+            for (Map.Entry<Coordinates, Integer> entry : coordinatesMap.entrySet()) {
+                int i = priorityQueue.poll();
+                if (entry.getValue() == i) {
+                    shortestWay = entry.getKey();
+                    break;
+                }
+            }
+
         return shortestWay;
     }
 
@@ -49,49 +60,43 @@ public abstract class Creature extends Entity {
         List<Coordinates> sets = new ArrayList<>();
         List<Coordinates> sets2 = new ArrayList<>();
         List<Coordinates> setser = new ArrayList<>();
-        Map<Coordinates, Integer> shortestWay = new TreeMap<>();
-        int i = 0;
 
         coordinatesShift.add(new CoordinatesShift(1, 0));
         coordinatesShift.add(new CoordinatesShift(0, 1));
         coordinatesShift.add(new CoordinatesShift(0, -1));
         coordinatesShift.add(new CoordinatesShift(-1, 0));
 
-//        shortestWay.put(creatureStart.coordinates, 0);
         queue.add(creatureStart.coordinates);
         sets2.add(new Coordinates(0, 0));
 
         while (!queue.isEmpty()) {
 
+
             for (Coordinates coordinates2 : setser) {
                 if (!queue.contains(coordinates2)) {
                     queue.add(coordinates2);
-
                 }
-//                if (!shortestWay.containsKey(coordinates2)) {
-//                    shortestWay.put(coordinates2, i);
-//                }
             }
             setser.clear();
             for (Coordinates coordinates1 : queue) {
-                if (coordinates1.equals(creatureGoals.coordinates)) {
-//                    for (Coordinates coordinates2 : queue) {
-//                        sets.add(coordinates2);
-//                    }
-//                    sets.addAll(theShortestWay((TreeMap<Coordinates, Integer>) shortestWay, coordinates1));
-                    queue.clear();
-                    System.out.println("CreateGoal finding!");
-                    break;
-                } else {
+                if (!coordinates1.equals(creatureGoals.coordinates)) {
                     for (CoordinatesShift coordinatesShift : coordinatesShift) {
                         if (coordinates1.canShift(coordinatesShift)) {
                             sets2.add(coordinates1.shift(coordinatesShift));
                             setser.add(coordinates1.shift(coordinatesShift));
                         }
                     }
+
+                } else {
+                    queue.clear();
+                    System.out.println("CreateGoal finding!");
+                    break;
                 }
             }
-         sets.add(theShortestWay(setser, creatureGoals));
+
+            creatureStart.coordinates=theShortestWay(setser, creatureGoals, creatureStart.coordinates);
+            sets.add(creatureStart.coordinates);
+
         }
 
         return sets;
