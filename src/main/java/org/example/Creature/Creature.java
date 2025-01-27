@@ -32,13 +32,6 @@ public abstract class Creature extends Entity {
         return bfs.breadthFirstSearch(creatureStart, creatureEnd, coordinatesShift);
     }
 
-    public Set<Coordinates> getNeighbours(Set<Coordinates> coordinates) {
-        for (Coordinates coordinate : coordinates) {
-
-        }
-        return coordinates;
-    }
-
 
     public Set<Coordinates> getAvailableMoveCoordinates(GameMap gameMap) {
         Set<Coordinates> result = new HashSet<>();

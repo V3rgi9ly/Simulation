@@ -6,7 +6,7 @@ import org.example.Creature.Creature;
 import java.util.*;
 
 public class BFS {
-    Creature creature;
+
     public List<Coordinates> breadthFirstSearch(Creature creatureStart, Creature creatureGoals, Set<CoordinatesShift> coordinatesShift) {
 
         Queue<Coordinates> queue = new ArrayDeque<>();
