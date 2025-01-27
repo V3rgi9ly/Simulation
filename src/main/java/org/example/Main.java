@@ -18,22 +18,15 @@ public class Main {
 //        MapConsoleRenderer renderer = new MapConsoleRenderer();
 //        renderer.renderer(map);
 
-        Creature predator=new Predator(2, 3, new Coordinates(20, 6), MapField.FILLED);
+        Creature predator=new Predator(2, 3, new Coordinates(31, 6), MapField.FILLED);
         Creature herbivore=new Herbivore(2, 3, new Coordinates(20, 1), MapField.FILLED);
 
 
-        List<Coordinates> sd=predator.breadthFirstSearch(predator,herbivore);
+        List<Coordinates> sd=predator.getCoordinates(predator,herbivore);
 
-
-
-
-        for(Coordinates c:sd){
-            System.out.println(c.toString());
-        }
-
-
-
-
+      for(Coordinates c:sd){
+          System.out.println(c);
+      }
 
     }
 }
