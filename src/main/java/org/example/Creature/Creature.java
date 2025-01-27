@@ -19,84 +19,54 @@ public abstract class Creature extends Entity {
         this.coordinates = coordinates;
     }
 
-
-    public Coordinates theShortestWay(List<Coordinates> listCoordinates, Creature creatureGoals, Coordinates creatureCoordinatesStep) {
-        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>();
-        Map<Coordinates, Integer> coordinatesMap = new HashMap<>();
-        Coordinates shortestWay = creatureCoordinatesStep;
-        List<Coordinates> lista = new ArrayList<>();
-
-        for (Coordinates s : listCoordinates) {
-            for (CoordinatesShift c : coordinatesShift) {
-                if (shortestWay.x + c.xShift == s.x && shortestWay.y + c.yShift == s.y) {
-                    lista.add(s);
-                }
-            }
-        }
-
-        for (Coordinates coordinates : lista) {
-            int sumCell = Math.abs(coordinates.x - creatureGoals.coordinates.x) + Math.abs(creatureGoals.coordinates.y - coordinates.y);
-            coordinatesMap.put(coordinates, sumCell);
-            priorityQueue.offer(sumCell);
-        }
-
-
-        for (Map.Entry<Coordinates, Integer> entry : coordinatesMap.entrySet()) {
-            int i = priorityQueue.poll();
-            if (entry.getValue() == i) {
-                shortestWay = entry.getKey();
-                break;
-            }
-        }
-
-        return shortestWay;
-    }
-
-
     public List<Coordinates> breadthFirstSearch(Creature creatureStart, Creature creatureGoals) {
-        Queue<Coordinates> queue = new ArrayDeque<>();
-        List<Coordinates> sets = new ArrayList<>();
-        List<Coordinates> sets2 = new ArrayList<>();
-        List<Coordinates> setser = new ArrayList<>();
 
         coordinatesShift.add(new CoordinatesShift(1, 0));
         coordinatesShift.add(new CoordinatesShift(0, 1));
         coordinatesShift.add(new CoordinatesShift(0, -1));
         coordinatesShift.add(new CoordinatesShift(-1, 0));
 
+        Queue<Coordinates> queue = new ArrayDeque<>();
+        Set<Coordinates> visited = new HashSet<>();
+        Map<Coordinates, Coordinates> parentMap = new HashMap<>(); // Для восстановления пути
+
         queue.add(creatureStart.coordinates);
-        sets2.add(new Coordinates(0, 0));
+        visited.add(creatureStart.coordinates);
 
         while (!queue.isEmpty()) {
+            Coordinates current = queue.poll();
 
-            for (Coordinates coordinates2 : setser) {
-                if (!queue.contains(coordinates2)) {
-                    queue.add(coordinates2);
-                }
+            if (current.equals(creatureGoals.coordinates)) {
+                System.out.println("CreatureGoal found!");
+                return reconstructPath(parentMap, creatureStart.coordinates, creatureGoals.coordinates);
             }
-            setser.clear();
-            for (Coordinates coordinates1 : queue) {
-                if (!coordinates1.equals(creatureGoals.coordinates)) {
-                    for (CoordinatesShift coordinatesShift : coordinatesShift) {
-                        if (coordinates1.canShift(coordinatesShift)) {
-                            sets2.add(coordinates1.shift(coordinatesShift));
-                            setser.add(coordinates1.shift(coordinatesShift));
-                        }
+
+            for (CoordinatesShift shift : coordinatesShift) {
+                if (current.canShift(shift)) {
+                    Coordinates neighbor = current.shift(shift);
+                    if (!visited.contains(neighbor)) {
+                        visited.add(neighbor);
+                        parentMap.put(neighbor, current);
+                        queue.add(neighbor);
                     }
-
-                } else {
-                    queue.clear();
-                    System.out.println("CreateGoal finding!");
-                    break;
                 }
             }
-
-            creatureStart.coordinates = theShortestWay(setser, creatureGoals, creatureStart.coordinates);
-            sets.add(creatureStart.coordinates);
-
         }
 
-        return sets;
+        System.out.println("CreatureGoal not found!");
+        return Collections.emptyList(); // Если путь не найден
+    }
+
+    private List<Coordinates> reconstructPath(Map<Coordinates, Coordinates> parentMap, Coordinates start, Coordinates goal) {
+        List<Coordinates> path = new ArrayList<>();
+        Coordinates current = goal;
+        while (!current.equals(start)) {
+            path.add(current);
+            current = parentMap.get(current);
+        }
+        path.add(start);
+        Collections.reverse(path);
+        return path;
     }
 
     public Set<Coordinates> getNeighbours(Set<Coordinates> coordinates) {
