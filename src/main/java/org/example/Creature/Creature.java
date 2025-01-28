@@ -10,13 +10,7 @@ public abstract class Creature extends Entity {
     protected Integer speed;
     protected Integer health;
     public final MapField mapField;
-    public Set<CoordinatesShift> coordinatesShift = new HashSet<>(Arrays.asList(
-            new CoordinatesShift(1, 0),
-            new CoordinatesShift(0, 1),
-            new CoordinatesShift(0, -1),
-            new CoordinatesShift(-1, 0)
 
-    ));
 
 
     protected Creature(Integer speed, Integer health, MapField mapField, Coordinates coordinates) {
@@ -26,11 +20,6 @@ public abstract class Creature extends Entity {
         this.coordinates = coordinates;
     }
 
-
-    public List<Coordinates> getCoordinates(Creature creatureStart, Creature creatureEnd) {
-        BFS bfs = new BFS();
-        return bfs.breadthFirstSearch(creatureStart, creatureEnd, coordinatesShift);
-    }
 
 
     public Set<Coordinates> getAvailableMoveCoordinates(GameMap gameMap) {

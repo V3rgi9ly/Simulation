@@ -7,7 +7,9 @@ import java.util.*;
 
 public class BFS {
 
-    public List<Coordinates> breadthFirstSearch(Creature creatureStart, Creature creatureGoals, Set<CoordinatesShift> coordinatesShift) {
+
+
+    private List<Coordinates> breadthFirstSearch(Creature creatureStart, Creature creatureGoals, Set<CoordinatesShift> coordinatesShift) {
 
         Queue<Coordinates> queue = new ArrayDeque<>();
         Set<Coordinates> visited = new HashSet<>();
@@ -54,4 +56,9 @@ public class BFS {
         return path;
     }
 
+
+    public List<Coordinates> getCoordinates(Creature creatureStart, Creature creatureEnd) {
+        BFS bfs = new BFS();
+        return bfs.breadthFirstSearch(creatureStart, creatureEnd,new CoordinatesShift().getCoordinatesShift());
+    }
 }

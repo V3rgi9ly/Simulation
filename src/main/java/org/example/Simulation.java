@@ -1,10 +1,14 @@
 package org.example;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Simulation {
 
     private final GameMap gameMap;
-    private int counter;
+    private int counter=0;
     Actions actions=new Actions();
+    List<Coordinates> list=new ArrayList<>();
 
 
     private MapConsoleRenderer renderer= new MapConsoleRenderer();
@@ -16,13 +20,18 @@ public class Simulation {
 
     public void nextTurn(){
         actions.initAction(gameMap);
-        renderer.renderer(gameMap);
+
     }
 
     public void startSimulation() {
-        while (true){
-            
+        list=actions.initAction(gameMap);
+        for (int i=0;i<list.size();i++){
+
+            renderer.renderer(gameMap);
         }
+
+
+
 
     }
 

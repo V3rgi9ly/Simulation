@@ -1,10 +1,12 @@
 package org.example;
 
+import java.util.List;
+
 public class Actions {
 
 
-    public void initAction(GameMap gameMap) {
-        gameMap.setRandomPositionObject();
+    public List<Coordinates> initAction(GameMap gameMap) {
+       return gameMap.setRandomPositionObject();
     }
 
     public void turnAction() {

@@ -18,6 +18,8 @@ public class Predator extends Creature {
 
 
 
+
+
     @Override
     protected Set<CoordinatesShift> makeMovement() {
 //        return new HashSet<>(Arrays.asList(

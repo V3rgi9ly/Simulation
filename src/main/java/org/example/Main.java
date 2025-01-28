@@ -11,22 +11,23 @@ public class Main {
     public static void main(String[] args) {
         GameMap gameMap =new GameMap();
         Simulation simulation=new Simulation(gameMap);
-        simulation.nextTurn();
+        simulation.startSimulation();
+//        simulation.nextTurn();
 //        Map map=new Map();
 //        map.setRandomPositionObject();
 //
 //        MapConsoleRenderer renderer = new MapConsoleRenderer();
 //        renderer.renderer(map);
 
-        Creature predator=new Predator(2, 3, new Coordinates(31, 6), MapField.FILLED);
-        Creature herbivore=new Herbivore(2, 3, new Coordinates(20, 1), MapField.FILLED);
-
-
-        List<Coordinates> sd=predator.getCoordinates(predator,herbivore);
-
-      for(Coordinates c:sd){
-          System.out.println(c);
-      }
+//        Creature predator=new Predator(2, 3, new Coordinates(31, 6), MapField.FILLED);
+//        Creature herbivore=new Herbivore(2, 3, new Coordinates(20, 1), MapField.FILLED);
+//
+//
+//        List<Coordinates> sd=predator.getCoordinates(predator,herbivore);
+//
+//      for(Coordinates c:sd){
+//          System.out.println(c);
+//      }
 
     }
 }
