@@ -1,5 +1,7 @@
 package org.example;
 
+import com.sun.source.tree.WhileLoopTree;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,16 +21,24 @@ public class Simulation {
     }
 
     public void nextTurn(){
-        actions.initAction(gameMap);
+
+//        actions.initAction(gameMap);
+//        renderer.renderer(gameMap);
 
     }
 
     public void startSimulation() {
-        list=actions.initAction(gameMap);
-        for (int i=0;i<list.size();i++){
 
+
+        while (true){
+            actions.initAction(gameMap,counter);
             renderer.renderer(gameMap);
+            counter++;
         }
+//        for (int i=0;i<list.size();i++){
+//
+//            System.out.println("\n");
+//        }
 
 
 

@@ -1,12 +1,8 @@
 package org.example;
 
-import org.example.Creature.CoordinatesShift;
 import org.example.Creature.Creature;
 import org.example.Creature.Herbivore;
 import org.example.Creature.Predator;
-import org.example.inanimateObject.Grass;
-import org.example.inanimateObject.Rock;
-import org.example.inanimateObject.Tree;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -49,19 +45,38 @@ public class GameMap {
         return !objectss.containsKey(coordinates);
     }
 
+    public HashMap<Coordinates, Entity> getStaricObject(){
+        return objectss;
+    }
+
+    public Entity deletedStaricObject(Coordinates coordinates) {
+        return objectss.remove(coordinates);
+    }
+
+
 
     public Entity getEntity(Coordinates coordinates) {
         return objectss.get(coordinates);
     }
 
 
-    public List<Coordinates> setRandomPositionObject() {
+    public void setRandomPositionObject(int i) {
         BFS bfs = new BFS();
         Creature predator = new Predator(2, 3, new Coordinates(31, 6), MapField.FILLED);
         Creature herbivore = new Herbivore(2, 3, new Coordinates(20, 1), MapField.FILLED);
-        return bfs.getCoordinates(predator, herbivore);
+        setStaticObjects(predator.coordinates, predator);
+        setStaticObjects(herbivore.coordinates, herbivore);
 
+        List<Coordinates> sd=bfs.getCoordinates(predator,herbivore);
+        setListVisited(i, sd, predator);
     }
+
+    public void setListVisited(int i, List<Coordinates> listVisited, Creature creaturePredator) {
+        deletedStaricObject(creaturePredator.coordinates);
+        setStaticObjects(listVisited.get(i), new Predator(2, 3, listVisited.get(i), MapField.FILLED));
+    }
+
+
 
 //    public List<Coordinates> getListVisited(Creature creatureStart, Creature creatureEnd) {
 //        return new Creature(creatureStart,creatureEnd);

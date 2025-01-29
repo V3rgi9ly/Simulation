@@ -5,8 +5,11 @@ import java.util.List;
 public class Actions {
 
 
-    public List<Coordinates> initAction(GameMap gameMap) {
-       return gameMap.setRandomPositionObject();
+    public void initAction(GameMap gameMap, int i) {
+
+        gameMap.setRandomPositionObject(i);
+
+
     }
 
     public void turnAction() {
