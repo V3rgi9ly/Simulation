@@ -22,28 +22,23 @@ public class Simulation {
 
     public void nextTurn(){
 
-//        actions.initAction(gameMap);
-//        renderer.renderer(gameMap);
+        actions.initAction(gameMap);
+        renderer.renderer(gameMap);
 
     }
 
-    public void startSimulation() {
+    public void startSimulation(){
+        actions.initAction(gameMap);
+        while(true) {
 
-
-        while (true){
-            actions.initAction(gameMap,counter);
+            actions.turnAction(gameMap, counter);
             renderer.renderer(gameMap);
             counter++;
+            System.out.println("\n");
         }
-//        for (int i=0;i<list.size();i++){
-//
-//            System.out.println("\n");
-//        }
-
-
-
-
     }
 
-    public void stopSimulation() {}
+    public void pausSimulation(){
+
+    }
 }

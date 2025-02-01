@@ -1,13 +1,13 @@
 package org.example;
 
+import com.sun.source.tree.Tree;
 import org.example.Creature.Creature;
 import org.example.Creature.Herbivore;
 import org.example.Creature.Predator;
+import org.example.inanimateObject.Grass;
+import org.example.inanimateObject.Rock;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class GameMap {
 
@@ -17,6 +17,13 @@ public class GameMap {
 
     List<Coordinates> listVisited = new ArrayList<Coordinates>();
 
+    Predator predator1 = new Predator(2, 3, new Coordinates(31, 6), MapField.FILLED);
+    Herbivore herbivore1 = new Herbivore(2, 3, new Coordinates(21, 1), MapField.FILLED);
+    Grass grass1 = new Grass(new Coordinates(2, 5), MapField.FILLED);
+    Rock rock1 = new Rock(new Coordinates(6, 3), MapField.FILLED);
+
+    BFS bfs = new BFS();
+    List<Coordinates> sd = bfs.getCoordinates(predator1, herbivore1);
 
     HashMap<Coordinates, Entity> objectss = new HashMap<>();
 
@@ -45,7 +52,7 @@ public class GameMap {
         return !objectss.containsKey(coordinates);
     }
 
-    public HashMap<Coordinates, Entity> getStaricObject(){
+    public HashMap<Coordinates, Entity> getStaricObject() {
         return objectss;
     }
 
@@ -54,33 +61,27 @@ public class GameMap {
     }
 
 
-
     public Entity getEntity(Coordinates coordinates) {
         return objectss.get(coordinates);
     }
 
 
-    public void setRandomPositionObject(int i) {
-        BFS bfs = new BFS();
-        Creature predator = new Predator(2, 3, new Coordinates(31, 6), MapField.FILLED);
-        Creature herbivore = new Herbivore(2, 3, new Coordinates(20, 1), MapField.FILLED);
-        setStaticObjects(predator.coordinates, predator);
-        setStaticObjects(herbivore.coordinates, herbivore);
+    public void setRandomPositionObject() {
+        setStaticObjects(predator1.coordinates, predator1);
+        setStaticObjects(herbivore1.coordinates, herbivore1);
 
-        List<Coordinates> sd=bfs.getCoordinates(predator,herbivore);
-        setListVisited(i, sd, predator);
+        setStaticObjects(grass1.coordinates, grass1);
+        setStaticObjects(rock1.coordinates, rock1);
     }
 
-    public void setListVisited(int i, List<Coordinates> listVisited, Creature creaturePredator) {
-        deletedStaricObject(creaturePredator.coordinates);
-        setStaticObjects(listVisited.get(i), new Predator(2, 3, listVisited.get(i), MapField.FILLED));
+    public void getListVisited(int counter) {
+
+        predator1.coordinates.x = sd.get(counter).x;
+        predator1.coordinates.y = sd.get(counter).y;
+        setStaticObjects(predator1.coordinates, predator1);
+
     }
 
-
-
-//    public List<Coordinates> getListVisited(Creature creatureStart, Creature creatureEnd) {
-//        return new Creature(creatureStart,creatureEnd);
-//    }
 
 
 }
