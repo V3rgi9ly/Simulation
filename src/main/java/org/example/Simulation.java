@@ -29,7 +29,7 @@ public class Simulation {
 
     public void startSimulation(){
         actions.initAction(gameMap);
-        while(true) {
+        while(counter<15) {
 
             actions.turnAction(gameMap, counter);
             renderer.renderer(gameMap);

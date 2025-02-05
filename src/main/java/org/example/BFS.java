@@ -3,6 +3,7 @@ package org.example;
 import org.example.Creature.CoordinatesShift;
 import org.example.Creature.Creature;
 
+import javax.swing.plaf.PanelUI;
 import java.util.*;
 
 public class BFS {
@@ -27,7 +28,7 @@ public class BFS {
             for (CoordinatesShift shift : coordinatesShift) {
                 if (current.canShift(shift)) {
                     Coordinates neighbor = current.shift(shift);
-                    if (!visited.contains(neighbor)) {
+                    if (!visited.contains(neighbor) && !GameMap.listVisited.contains(neighbor)) {
                         visited.add(neighbor);
                         parentMap.put(neighbor, current);
                         queue.add(neighbor);
@@ -59,4 +60,8 @@ public class BFS {
         BFS bfs = new BFS();
         return bfs.breadthFirstSearch(creatureStart, creatureEnd,new CoordinatesShift().getCoordinatesShift());
     }
+
+
+
+
 }

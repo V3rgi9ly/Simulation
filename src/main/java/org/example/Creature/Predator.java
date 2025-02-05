@@ -2,38 +2,39 @@ package org.example.Creature;
 
 import org.example.Coordinates;
 import org.example.Entity;
+import org.example.GameMap;
 import org.example.MapField;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class Predator extends Creature {
 
 
     public Predator(Integer speed, Integer health, Coordinates coordinates, MapField mapField) {
         super(speed, health, mapField, coordinates);
+
     }
 
 
-
-
-
+    @Override
+    public void makeTakeover(GameMap map, Coordinates coordinates) {
+        HashMap<Coordinates, Entity> sd=new HashMap<>(map.getStaticObjects());
+        for (CoordinatesShift coordinatesShift:makeMovement()){
+            for (Map.Entry<Coordinates, Entity> entry:sd.entrySet()){
+                Coordinates de=entry.getKey();
+                Coordinates c=coordinates.shift(coordinatesShift);
+                if (c.x.equals(de.x) && c.y.equals(de.y)){
+                    map.setDeletedCreature(entry.getValue());
+                }
+            }
+        }
+    }
 
     @Override
     protected Set<CoordinatesShift> makeMovement() {
-//        return new HashSet<>(Arrays.asList(
-//                new CoordinatesShift(1,1),
-//                new CoordinatesShift(1,0),
-//                new CoordinatesShift(0,1),
-//                new CoordinatesShift(-1,-1),
-//                new CoordinatesShift(0,-1),
-//                new CoordinatesShift(-1,0)
-//
-//        )
-//
-//        );
-        return new HashSet<>(Arrays.asList());
+        CoordinatesShift coordinatesShift = new CoordinatesShift();
+        Set<CoordinatesShift> set=coordinatesShift.coordinatesShift;
+        return set;
     }
 }
 

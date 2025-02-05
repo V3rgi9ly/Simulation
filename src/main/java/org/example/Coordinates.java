@@ -1,6 +1,7 @@
 package org.example;
 
 import org.example.Creature.CoordinatesShift;
+import org.example.Creature.Creature;
 
 import java.util.Objects;
 
@@ -8,24 +9,27 @@ public class Coordinates {
     public Integer x;
     public Integer y;
 
+
     public Coordinates(Integer x, Integer y) {
         this.x = x;
         this.y = y;
+
     }
 
 
-    public Coordinates shift(CoordinatesShift coordinatesShift){
-        return new Coordinates(this.x+ coordinatesShift.xShift, this.y+coordinatesShift.yShift);
+    public Coordinates shift(CoordinatesShift coordinatesShift) {
+        return new Coordinates(this.x + coordinatesShift.xShift, this.y + coordinatesShift.yShift);
     }
 
-    public boolean canShift(CoordinatesShift coordinatesShift){
-        int f=x+coordinatesShift.xShift;
-        int g=y+coordinatesShift.yShift;
 
-        if ((f<=0) || (f> GameMap.xHorizontal)) {
+    public boolean canShift(CoordinatesShift coordinatesShift) {
+        int f = x + coordinatesShift.xShift;
+        int g = y + coordinatesShift.yShift;
+
+        if ((f <= 0) || (f > GameMap.xHorizontal)) {
             return false;
         }
-        if (g<=0 || g> GameMap.yVertical) {
+        if (g <= 0 || g > GameMap.yVertical) {
             return false;
         }
 

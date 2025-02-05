@@ -20,21 +20,7 @@ public abstract class Creature extends Entity {
         this.coordinates = coordinates;
     }
 
-
-
-    public Set<Coordinates> getAvailableMoveCoordinates(GameMap gameMap) {
-        Set<Coordinates> result = new HashSet<>();
-        for (CoordinatesShift shift : makeMovement()) {
-            if (coordinates.canShift(shift)) {
-                Coordinates newCoordinate = coordinates.shift(shift);
-
-                if (isSquareAvailableForMove(newCoordinate, gameMap)) {
-                    result.add(newCoordinate);
-                }
-            }
-        }
-        return result;
-    }
+    protected abstract void makeTakeover(GameMap map, Coordinates coordinates);
 
     private boolean isSquareAvailableForMove(Coordinates newCoordinate, GameMap gameMap) {
         return gameMap.isSquareEmpty(newCoordinate) || gameMap.getEntity(newCoordinate).mapField != mapField;
