@@ -1,12 +1,19 @@
-package org.example;
+package org.example.coordinates;
 
-import org.example.Creature.CoordinatesShift;
-import org.example.Creature.Creature;
+import org.example.map.GameMap;
+import org.example.models.Creature;
 
-import javax.swing.plaf.PanelUI;
 import java.util.*;
 
 public class BFS {
+
+    public final GameMap gameMap;
+    public final List<Coordinates> shortestPath;
+
+    public BFS(GameMap gameMap) {
+        this.gameMap = gameMap;
+        this.shortestPath = new ArrayList<>();
+    }
 
     private List<Coordinates> breadthFirstSearch(Creature creatureStart, Creature creatureGoals, Set<CoordinatesShift> coordinatesShift) {
 
@@ -14,21 +21,22 @@ public class BFS {
         Set<Coordinates> visited = new HashSet<>();
         Map<Coordinates, Coordinates> parentMap = new HashMap<>(); // Для восстановления пути
 
-        queue.add(creatureStart.coordinates);
-        visited.add(creatureStart.coordinates);
+        queue.add(creatureStart.getCoordinates());
+        visited.add(creatureStart.getCoordinates());
 
         while (!queue.isEmpty()) {
             Coordinates current = queue.poll();
 
-            if (current.equals(creatureGoals.coordinates)) {
+            if (current.equals(creatureGoals.getCoordinates())) {
                 System.out.println("CreatureGoal found!");
-                return reconstructPath(parentMap, creatureStart.coordinates, creatureGoals.coordinates);
+                return reconstructPath(parentMap, creatureStart.getCoordinates(), creatureGoals.getCoordinates());
             }
 
             for (CoordinatesShift shift : coordinatesShift) {
-                if (current.canShift(shift)) {
+                if (current.canShift(shift, gameMap)) {
                     Coordinates neighbor = current.shift(shift);
-                    if (!visited.contains(neighbor) && !GameMap.listVisited.contains(neighbor)) {
+                    if (!visited.contains(neighbor)) {
+//                    if (!visited.contains(neighbor) && !GameMap.listVisited.contains(neighbor)) {
                         visited.add(neighbor);
                         parentMap.put(neighbor, current);
                         queue.add(neighbor);
@@ -42,9 +50,8 @@ public class BFS {
     }
 
 
-
     private List<Coordinates> reconstructPath(Map<Coordinates, Coordinates> parentMap, Coordinates start, Coordinates goal) {
-        List<Coordinates> path = new ArrayList<>();
+        List<Coordinates> path =shortestPath;
         Coordinates current = goal;
         while (!current.equals(start)) {
             path.add(current);
@@ -56,12 +63,9 @@ public class BFS {
     }
 
 
-    public List<Coordinates> getCoordinates(Creature creatureStart, Creature creatureEnd) {
-        BFS bfs = new BFS();
-        return bfs.breadthFirstSearch(creatureStart, creatureEnd,new CoordinatesShift().getCoordinatesShift());
+    public List<Coordinates> getCoordinates(Creature creature, Creature goal) {
+
+        return breadthFirstSearch(creature, goal,new CoordinatesShift().getCoordinatesShift());
     }
-
-
-
 
 }

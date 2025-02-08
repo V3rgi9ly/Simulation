@@ -1,6 +1,8 @@
 package org.example;
 
-import com.sun.source.tree.WhileLoopTree;
+import org.example.coordinates.Coordinates;
+import org.example.map.GameMap;
+import org.example.map.MapConsoleRenderer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,37 +10,43 @@ import java.util.List;
 public class Simulation {
 
     private final GameMap gameMap;
-    private int counter=0;
-    Actions actions=new Actions();
-    List<Coordinates> list=new ArrayList<>();
+    private int counter = 0;
+//    public Action action=;
 
 
-    private MapConsoleRenderer renderer= new MapConsoleRenderer();
+    List<Coordinates> list = new ArrayList<>();
+
+
+    private MapConsoleRenderer renderer = new MapConsoleRenderer();
 
 
     public Simulation(GameMap gameMap) {
         this.gameMap = gameMap;
     }
 
-    public void nextTurn(){
-
-        actions.initAction(gameMap);
+    public void nextTurn() {
+//        action.setPositionObject();
+//        initAction(gameMap);
         renderer.renderer(gameMap);
 
     }
 
-    public void startSimulation(){
-        actions.initAction(gameMap);
-        while(counter<15) {
+    public void startSimulation() {
+////        initAction(gameMap);
+//        while(counter<15) {
+//
+////            actions.turnAction(gameMap, counter);
+//            renderer.renderer(gameMap);
+//            counter++;
+//            System.out.println("\n");
+//        }
 
-            actions.turnAction(gameMap, counter);
-            renderer.renderer(gameMap);
-            counter++;
-            System.out.println("\n");
-        }
+        gameMap.createDefaultEntity();
+        renderer.renderer(gameMap);
+//        System.out.println(gameMap.getListVisited());
     }
 
-    public void pausSimulation(){
+    public void pausSimulation() {
 
     }
 }

@@ -1,11 +1,7 @@
 package org.example;
 
 
-import org.example.Creature.Creature;
-import org.example.Creature.Herbivore;
-import org.example.Creature.Predator;
-
-import java.util.*;
+import org.example.map.GameMap;
 
 public class Main {
     public static void main(String[] args) {

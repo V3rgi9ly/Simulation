@@ -1,7 +1,6 @@
-package org.example;
+package org.example.coordinates;
 
-import org.example.Creature.CoordinatesShift;
-import org.example.Creature.Creature;
+import org.example.map.GameMap;
 
 import java.util.Objects;
 
@@ -18,18 +17,18 @@ public class Coordinates {
 
 
     public Coordinates shift(CoordinatesShift coordinatesShift) {
-        return new Coordinates(this.x + coordinatesShift.xShift, this.y + coordinatesShift.yShift);
+        return new Coordinates(this.x + coordinatesShift.getXShift(), this.y + coordinatesShift.getYShift());
     }
 
 
-    public boolean canShift(CoordinatesShift coordinatesShift) {
-        int f = x + coordinatesShift.xShift;
-        int g = y + coordinatesShift.yShift;
+    public boolean canShift(CoordinatesShift coordinatesShift, GameMap gameMap) {
+        int f = x + coordinatesShift.getXShift();
+        int g = y + coordinatesShift.getYShift();
 
-        if ((f <= 0) || (f > GameMap.xHorizontal)) {
+        if ((f <= 0) || (f > gameMap.getX())) {
             return false;
         }
-        if (g <= 0 || g > GameMap.yVertical) {
+        if (g <= 0 || g > gameMap.getY()) {
             return false;
         }
 

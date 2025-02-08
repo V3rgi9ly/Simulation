@@ -1,15 +1,17 @@
-package org.example.Creature;
+package org.example.coordinates;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class CoordinatesShift {
 
-    public int xShift;
-    public int yShift;
+    private int xShift;
+    private int yShift;
 
-    public  Set<CoordinatesShift> coordinatesShift;
+    private  Set<CoordinatesShift> coordinatesShift;
+
     public CoordinatesShift() {
         coordinatesShift=new HashSet<>(Arrays.asList(
                 new CoordinatesShift(1, 0),
@@ -27,4 +29,14 @@ public class CoordinatesShift {
     public Set<CoordinatesShift> getCoordinatesShift() {
         return coordinatesShift;
     }
+
+    public Integer getXShift() {
+        return xShift;
+    }
+
+    public Integer getYShift() {
+        return yShift;
+    }
+
+
 }
