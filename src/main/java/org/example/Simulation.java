@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.action.Action;
 import org.example.coordinates.Coordinates;
 import org.example.map.GameMap;
 import org.example.map.MapConsoleRenderer;
@@ -11,17 +12,18 @@ public class Simulation {
 
     private final GameMap gameMap;
     private int counter = 0;
-//    public Action action=;
 
-
-    List<Coordinates> list = new ArrayList<>();
-
-
+    List<Action> iniActions;
     private MapConsoleRenderer renderer = new MapConsoleRenderer();
 
 
     public Simulation(GameMap gameMap) {
         this.gameMap = gameMap;
+        iniActions = new ArrayList<>();
+    }
+
+    public void setIniActions(Action action) {
+        iniActions.add(action);
     }
 
     public void nextTurn() {
@@ -32,6 +34,11 @@ public class Simulation {
     }
 
     public void startSimulation() {
+
+        for (Action action : iniActions) {
+            action.perform(gameMap);
+        }
+
 ////        initAction(gameMap);
 //        while(counter<15) {
 //
@@ -41,7 +48,7 @@ public class Simulation {
 //            System.out.println("\n");
 //        }
 
-        gameMap.createDefaultEntity();
+//        gameMap.createDefaultEntity();
         renderer.renderer(gameMap);
 //        System.out.println(gameMap.getListVisited());
     }

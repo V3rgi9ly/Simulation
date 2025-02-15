@@ -91,7 +91,11 @@ public class GameMap {
         return !map.containsKey(coordinates);
     }
 
-    private void setStaticObjects(Coordinates coordinates, Entity entity) {
+    public HashMap<Coordinates, Entity> getMap() {
+        return map;
+    }
+
+    public void setStaticObjects(Coordinates coordinates, Entity entity) {
         entity.getCoordinates().x = coordinates.x;
         entity.getCoordinates().y = coordinates.y;
         map.put(coordinates, entity);

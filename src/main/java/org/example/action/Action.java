@@ -1,7 +1,8 @@
 package org.example.action;
 
+import org.example.map.GameMap;
+
 public interface Action {
 
-    void initAction();
-    void turnAction();
+    void perform(GameMap gameMap);
 }

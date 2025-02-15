@@ -1,14 +1,9 @@
 package org.example.models;
 
 
-import org.example.action.Action;
-import org.example.action.MovedI;
 import org.example.coordinates.Coordinates;
-import org.example.coordinates.CoordinatesShift;
 import org.example.enums.MapField;
 import org.example.enums.Obstacle;
-
-import java.util.Set;
 
 public abstract class Entity  {
     protected Coordinates coordinates;

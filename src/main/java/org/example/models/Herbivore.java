@@ -1,20 +1,21 @@
 package org.example.models;
 
-import org.example.action.Goal;
 import org.example.coordinates.Coordinates;
-import org.example.coordinates.CoordinatesShift;
 import org.example.map.GameMap;
 import org.example.enums.MapField;
 
-import java.util.Set;
-
-public class Herbivore extends Creature implements Goal {
+public class Herbivore extends Creature {
 
 
     public Herbivore(Integer speed, Integer health, Coordinates location, MapField mapField) {
         super(speed, health, mapField, location);
     }
 
+
+    @Override
+    public void makeMove(GameMap gameMap) {
+
+    }
 
     @Override
     protected void makeTakeover(GameMap map, Coordinates coordinates) {
