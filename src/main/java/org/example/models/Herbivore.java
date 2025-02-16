@@ -54,7 +54,6 @@ public class Herbivore extends Creature {
         }
     }
 
-
     private boolean isAdjacent(Coordinates target) {
         int dx = Math.abs(this.getCoordinates().x - target.x);
         int dy = Math.abs(this.getCoordinates().y - target.y);
