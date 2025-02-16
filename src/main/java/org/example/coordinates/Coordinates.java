@@ -1,6 +1,9 @@
 package org.example.coordinates;
 
 import org.example.map.GameMap;
+import org.example.models.Entity;
+import org.example.models.Rock;
+import org.example.models.Tree;
 
 import java.util.Objects;
 
@@ -30,6 +33,12 @@ public class Coordinates {
         }
         if (g <= 0 || g > gameMap.getY()) {
             return false;
+        }
+
+        Coordinates newCoordinates = new Coordinates(f, g);
+        Entity entity = gameMap.getEntity(newCoordinates);
+        if (entity instanceof Rock || entity instanceof Tree) {
+            return false; // Клетка занята препятствием
         }
 
         return true;

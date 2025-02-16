@@ -48,6 +48,7 @@ public class Simulation {
 
         while (true){
             nextTurn();
+            System.out.println("\n");
             try{
                 Thread.sleep(1000);
             }catch (InterruptedException e){

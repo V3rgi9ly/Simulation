@@ -29,7 +29,7 @@ public class BFS {
             Coordinates current = queue.poll();
 
             if (current.equals(creatureGoals.getCoordinates())) {
-                System.out.println("CreatureGoal found!");
+//                System.out.println("CreatureGoal found!");
                 return reconstructPath(parentMap, creatureStart.getCoordinates(), creatureGoals.getCoordinates());
             }
 
@@ -46,7 +46,7 @@ public class BFS {
             }
         }
 
-        System.out.println("CreatureGoal not found!");
+//        System.out.println("CreatureGoal not found!");
         return Collections.emptyList(); // Если путь не найден
     }
 

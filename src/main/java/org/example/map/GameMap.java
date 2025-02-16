@@ -9,7 +9,7 @@ import java.util.*;
 
 public class GameMap {
 
-    HashMap<Coordinates, Entity> map;
+    private final HashMap<Coordinates, Entity> map;
     private final Integer x;
     private final Integer y;
     CoordinateService coordinateService;
@@ -41,8 +41,13 @@ public class GameMap {
         return map;
     }
 
-    public void deleteEntity(Entity creature) {
-        map.remove(creature.getCoordinates(), creature);
+    public void deleteEntity(Entity entity) {
+        if (entity != null && map.containsKey(entity.getCoordinates())) {
+            map.remove(entity.getCoordinates());
+//            System.out.println("Объект " + entity.getClass().getSimpleName() + " удалён с координат " + entity.getCoordinates());
+        } else {
+//            System.out.println("Объект не найден на карте.");
+        }
     }
 
     public boolean isSquareEmpty(Coordinates coordinates) {
@@ -50,9 +55,17 @@ public class GameMap {
     }
 
     public void setStaticObjects(Coordinates coordinates, Entity entity) {
-        entity.getCoordinates().x = coordinates.x;
-        entity.getCoordinates().y = coordinates.y;
+        // Удаляем объект со старых координат (если они есть)
+        if (entity.getCoordinates() != null) {
+            map.remove(entity.getCoordinates());
+        }
+
+        // Обновляем координаты объекта
+        entity.setCoordinates(coordinates);
+
+        // Добавляем объект на новые координаты
         map.put(coordinates, entity);
+//        System.out.println("Объект " + entity.getClass().getSimpleName() + " добавлен на координаты " + coordinates);
     }
 
 
