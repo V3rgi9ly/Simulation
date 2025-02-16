@@ -9,6 +9,7 @@ public class Main {
 //        gameMap.setRandomPositionObject();
         Simulation simulation = new Simulation(gameMap);
 //        simulation.nextTurn();
+        simulation.setTurnActions(new MoveCreatures());
         simulation.setIniActions(new SpawEntity());
         simulation.startSimulation();
 

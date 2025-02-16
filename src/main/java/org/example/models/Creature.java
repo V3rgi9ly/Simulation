@@ -21,7 +21,13 @@ public abstract class Creature extends Entity  {
 
     public abstract void makeMove(GameMap gameMap);
 
-    protected abstract void makeTakeover(GameMap map, Coordinates coordinates);
+//    protected abstract void makeTakeover(GameMap map, Coordinates coordinates);
+
+    public void setCoordinates(Coordinates coordinates) {
+        this.coordinates = coordinates;
+    }
+
+
 
 
 }

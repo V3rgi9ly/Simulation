@@ -2,6 +2,7 @@ package org.example.coordinates;
 
 import org.example.map.GameMap;
 import org.example.models.Creature;
+import org.example.models.Entity;
 
 import java.util.*;
 
@@ -15,7 +16,7 @@ public class BFS {
         this.shortestPath = new ArrayList<>();
     }
 
-    private List<Coordinates> breadthFirstSearch(Creature creatureStart, Creature creatureGoals, Set<CoordinatesShift> coordinatesShift) {
+    private List<Coordinates> breadthFirstSearch(Entity creatureStart, Entity creatureGoals, Set<CoordinatesShift> coordinatesShift) {
 
         Queue<Coordinates> queue = new ArrayDeque<>();
         Set<Coordinates> visited = new HashSet<>();
@@ -63,7 +64,7 @@ public class BFS {
     }
 
 
-    public List<Coordinates> getCoordinates(Creature creature, Creature goal) {
+    public List<Coordinates> getCoordinates(Entity creature, Entity goal) {
 
         return breadthFirstSearch(creature, goal,new CoordinatesShift().getCoordinatesShift());
     }

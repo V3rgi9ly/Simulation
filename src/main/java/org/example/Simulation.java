@@ -14,23 +14,30 @@ public class Simulation {
     private int counter = 0;
 
     List<Action> iniActions;
+    List<Action> turnActions;
     private MapConsoleRenderer renderer = new MapConsoleRenderer();
 
 
     public Simulation(GameMap gameMap) {
         this.gameMap = gameMap;
         iniActions = new ArrayList<>();
+        turnActions=new ArrayList<>();
     }
 
     public void setIniActions(Action action) {
         iniActions.add(action);
     }
 
-    public void nextTurn() {
-//        action.setPositionObject();
-//        initAction(gameMap);
-        renderer.renderer(gameMap);
+    public void setTurnActions(Action action) {
+        turnActions.add(action);
+    }
 
+    public void nextTurn() {
+        counter++;
+        for (Action action:turnActions){
+            action.perform(gameMap);
+        }
+        renderer.renderer(gameMap);
     }
 
     public void startSimulation() {
@@ -39,18 +46,15 @@ public class Simulation {
             action.perform(gameMap);
         }
 
-////        initAction(gameMap);
-//        while(counter<15) {
-//
-////            actions.turnAction(gameMap, counter);
-//            renderer.renderer(gameMap);
-//            counter++;
-//            System.out.println("\n");
-//        }
+        while (true){
+            nextTurn();
+            try{
+                Thread.sleep(1000);
+            }catch (InterruptedException e){
+                e.printStackTrace();
+            }
+        }
 
-//        gameMap.createDefaultEntity();
-        renderer.renderer(gameMap);
-//        System.out.println(gameMap.getListVisited());
     }
 
     public void pausSimulation() {

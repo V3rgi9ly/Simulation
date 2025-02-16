@@ -13,7 +13,7 @@ import java.util.Map;
 public class MoveCreatures implements Action {
     @Override
     public void perform(GameMap gameMap) {
-        for (Entity entity : new ArrayList<>(gameMap.getMap().values())) {
+        for (Entity entity : new ArrayList<>(gameMap.getGameMap().values())) {
             if (entity instanceof Creature) {
                 ((Creature) entity).makeMove(gameMap);
             }
