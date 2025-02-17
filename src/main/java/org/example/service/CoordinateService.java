@@ -60,7 +60,7 @@ public class CoordinateService {
     }
 
     private double calculateDistance(Coordinates a, Coordinates b) {
-        return Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2));
+        return Math.sqrt(Math.pow(a.getX() - b.getX(), 2) + Math.pow(a.getY() - b.getY(), 2));
     }
 
 }

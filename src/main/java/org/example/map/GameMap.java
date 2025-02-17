@@ -25,13 +25,7 @@ public class GameMap {
         return coordinateService;
     }
 
-    public Integer getX() {
-        return x;
-    }
 
-    public Integer getY() {
-        return y;
-    }
 
     public Entity getEntity(Coordinates coordinates) {
         return map.get(coordinates);
@@ -44,9 +38,6 @@ public class GameMap {
     public void deleteEntity(Entity entity) {
         if (entity != null && map.containsKey(entity.getCoordinates())) {
             map.remove(entity.getCoordinates());
-//            System.out.println("Объект " + entity.getClass().getSimpleName() + " удалён с координат " + entity.getCoordinates());
-        } else {
-//            System.out.println("Объект не найден на карте.");
         }
     }
 
@@ -55,18 +46,32 @@ public class GameMap {
     }
 
     public void setStaticObjects(Coordinates coordinates, Entity entity) {
-        // Удаляем объект со старых координат (если они есть)
         if (entity.getCoordinates() != null) {
             map.remove(entity.getCoordinates());
         }
 
-        // Обновляем координаты объекта
         entity.setCoordinates(coordinates);
 
-        // Добавляем объект на новые координаты
         map.put(coordinates, entity);
-//        System.out.println("Объект " + entity.getClass().getSimpleName() + " добавлен на координаты " + coordinates);
     }
 
+    public boolean hasAliveHerbivores(){
+        for (Entity entity : map.values()) {
+            if (entity instanceof Herbivore){
+                Herbivore herbivore = (Herbivore) entity;
+                if (herbivore.isAlive()){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
+    public Integer getX() {
+        return x;
+    }
+
+    public Integer getY() {
+        return y;
+    }
 }

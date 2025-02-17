@@ -1,15 +1,17 @@
 package org.example.coordinates;
 
 import org.example.map.GameMap;
+import org.example.models.Creature;
 import org.example.models.Entity;
 import org.example.models.Rock;
 import org.example.models.Tree;
 
 import java.util.Objects;
+import java.util.PrimitiveIterator;
 
 public class Coordinates {
-    public Integer x;
-    public Integer y;
+    private Integer x;
+    private Integer y;
 
 
     public Coordinates(Integer x, Integer y) {
@@ -18,6 +20,14 @@ public class Coordinates {
 
     }
 
+    public Integer getX() {
+        return x;
+    }
+
+
+    public Integer getY() {
+        return y;
+    }
 
     public Coordinates shift(CoordinatesShift coordinatesShift) {
         return new Coordinates(this.x + coordinatesShift.getXShift(), this.y + coordinatesShift.getYShift());
