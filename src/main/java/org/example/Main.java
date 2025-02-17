@@ -1,6 +1,8 @@
 package org.example;
 
 
+import org.example.action.MoveCreatures;
+import org.example.action.SpawEntity;
 import org.example.map.GameMap;
 
 public class Main {

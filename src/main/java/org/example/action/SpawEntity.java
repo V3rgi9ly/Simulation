@@ -1,6 +1,5 @@
-package org.example;
+package org.example.action;
 
-import org.example.action.Action;
 import org.example.coordinates.Coordinates;
 import org.example.enums.MapField;
 import org.example.map.GameMap;
