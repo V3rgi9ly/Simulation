@@ -48,7 +48,6 @@ public class AStart {
                     if (closedSet.contains(neighbor)) continue;
                     Entity neighborEntity = gameMap.getEntity(neighbor);
                     if (neighborEntity instanceof Grass && !neighbor.equals(goal)) {
-                        System.out.println("Клетка " + neighbor + " занята травой (не целью).");
                         continue;
                     }
                     // Если клетка уже в закрытом списке, пропускаем её
