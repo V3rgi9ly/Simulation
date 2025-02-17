@@ -23,8 +23,6 @@ public class SpawEntity implements Action {
         gameMap.setStaticObjects( new Coordinates(1, 1),new Herbivore(3, 4, new Coordinates(11, 1), MapField.FILLED, coordinateService));
 
 
-
-
         gameMap.setStaticObjects(new Coordinates(5, 6),new Grass(new Coordinates(5, 6), MapField.FILLED));
         gameMap.setStaticObjects(new Coordinates(20, 6),new Grass(new Coordinates(20, 6), MapField.FILLED));
         gameMap.setStaticObjects(new Coordinates(31, 9),new Grass(new Coordinates(31, 9), MapField.FILLED));
@@ -38,15 +36,12 @@ public class SpawEntity implements Action {
         gameMap.setStaticObjects(new Coordinates(11, 8),new Grass(new Coordinates(11, 8), MapField.FILLED));
 
 
-
         gameMap.setStaticObjects(new Coordinates(6, 3),new Rock(new Coordinates(6, 3), MapField.FILLED));
         gameMap.setStaticObjects(new Coordinates(24, 1),new Rock(new Coordinates(24, 1), MapField.FILLED));
         gameMap.setStaticObjects(new Coordinates(21, 6),new Rock(new Coordinates(21, 6), MapField.FILLED));
-
         gameMap.setStaticObjects(new Coordinates(10, 3),new Rock(new Coordinates(10, 3), MapField.FILLED));
         gameMap.setStaticObjects(new Coordinates(21, 7),new Rock(new Coordinates(21, 7), MapField.FILLED));
         gameMap.setStaticObjects(new Coordinates(28, 3),new Rock(new Coordinates(28, 3), MapField.FILLED));
-
         gameMap.setStaticObjects(new Coordinates(4, 8),new Rock(new Coordinates(4, 8), MapField.FILLED));
         gameMap.setStaticObjects(new Coordinates(12, 5),new Rock(new Coordinates(12, 5), MapField.FILLED));
         gameMap.setStaticObjects(new Coordinates(17, 2),new Rock(new Coordinates(17, 2), MapField.FILLED));
