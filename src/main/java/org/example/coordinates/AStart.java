@@ -5,18 +5,17 @@ import org.example.models.Entity;
 
 import java.util.*;
 
-public class BFS {
+public class AStart {
 
     public final GameMap gameMap;
     public final List<Coordinates> shortestPath;
 
-    public BFS(GameMap gameMap) {
+    public AStart(GameMap gameMap) {
         this.gameMap = gameMap;
         this.shortestPath = new ArrayList<>();
     }
 
     private List<Coordinates> aStarSearch(Entity creatureStart, Entity creatureGoals, Set<CoordinatesShift> coordinatesShift) {
-
 
         Set<Coordinates> closedSet = new HashSet<>();
         Map<Coordinates, Coordinates> parentMap = new HashMap<>();
@@ -35,7 +34,9 @@ public class BFS {
             Coordinates current = openSet.poll();
 
             if (current.equals(goal)) {
-                return reconstructPath(parentMap, start, goal);
+                List<Coordinates> path = reconstructPath(parentMap, start, goal);
+//                return reconstructPath(parentMap, start, goal);
+                return path;
             }
 
             closedSet.add(current);
@@ -57,6 +58,7 @@ public class BFS {
             }
         }
 
+        System.out.println("Путь не найден.");
         return Collections.emptyList(); // Если путь не найден
     }
 

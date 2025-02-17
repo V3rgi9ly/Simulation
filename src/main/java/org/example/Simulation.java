@@ -37,18 +37,8 @@ public class Simulation {
     }
 
     public void nextTurn() {
-        if (isPaused) {
-            System.out.println("Симуляция на паузе. Введите 'resume', чтобы продолжить");
-            return;
-        }
 
         counter++;
-
-        if (!gameMap.hasAliveHerbivores()){
-            System.out.println("Все травоядные умерли. Симуляция завершена.");
-            stopSimulation();
-            return;
-        }
 
         for (Action action:turnActions){
             action.perform(gameMap);
@@ -64,7 +54,11 @@ public class Simulation {
 
         while (true){
             nextTurn();
-            handleUserInput();
+            if (!gameMap.hasAliveHerbivores()){
+                System.out.println("Все травоядные умерли. Симуляция завершена.");
+                stopSimulation();
+                break;
+            }
             System.out.println("\n");
             try{
                 Thread.sleep(1000);
@@ -75,39 +69,11 @@ public class Simulation {
 
     }
 
-    public void pauseSimulation() {
-        isPaused = true;
-        System.out.println("Симуляция приостановлена.");
-    }
-
-    public void resumeSimulation() {
-        isPaused = false;
-        System.out.println("Симуляция возобновлена.");
-    }
 
     public void stopSimulation() {
         isRunning = false;
         System.out.println("Симуляция остановлена.");
     }
 
-    private void handleUserInput(){
-        Scanner scanner = new Scanner(System.in);
-        if (scanner.hasNextLine()){
-            String input = scanner.nextLine().trim().toLowerCase();
 
-            switch (input){
-                case "pause":
-                    pauseSimulation();
-                    break;
-                case "resume":
-                    resumeSimulation();
-                    break;
-                case "exit":
-                    stopSimulation();
-                    break;
-                default:
-                    System.out.println("Неизвестная команда. Доступные команды: pause, resume, exit.");
-            }
-        }
-    }
 }

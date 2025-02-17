@@ -1,6 +1,6 @@
 package org.example.service;
 
-import org.example.coordinates.BFS;
+import org.example.coordinates.AStart;
 import org.example.coordinates.Coordinates;
 import org.example.map.GameMap;
 import org.example.models.*;
@@ -10,10 +10,10 @@ import java.util.*;
 public class CoordinateService {
 
 
-    private final BFS bfs;
+    private final AStart bfs;
 
     public CoordinateService(GameMap gameMap) {
-        bfs = new BFS(gameMap);
+        bfs = new AStart(gameMap);
 
     }
 
