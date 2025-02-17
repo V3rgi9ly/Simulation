@@ -8,9 +8,9 @@ import org.example.util.AppConf;
 public class MapConsoleRenderer {
 
     public void renderer(GameMap gameMap) {
-        for (int i = 0; i < gameMap.getY(); i++) {
+        for (int i = 0; i <= gameMap.getY(); i++) {
             String line = "";
-            for (int j = 0; j < gameMap.getX(); j++) {
+            for (int j = 0; j <= gameMap.getX(); j++) {
                 Coordinates coordinates = new Coordinates(j, i);
                 if (gameMap.isSquareEmpty(coordinates)) {
                     line+=getEmptySprite();

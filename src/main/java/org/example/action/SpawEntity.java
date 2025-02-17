@@ -28,7 +28,6 @@ public class SpawEntity implements Action {
         gameMap.setStaticObjects(new Coordinates(31, 9),new Grass(new Coordinates(31, 9), MapField.FILLED));
         gameMap.setStaticObjects(new Coordinates(35, 6),new Grass(new Coordinates(35, 6), MapField.FILLED));
         gameMap.setStaticObjects(new Coordinates(33, 1),new Grass(new Coordinates(33, 1), MapField.FILLED));
-
         gameMap.setStaticObjects(new Coordinates(4, 6),new Grass(new Coordinates(4, 6), MapField.FILLED));
         gameMap.setStaticObjects(new Coordinates(15, 6),new Grass(new Coordinates(15, 6), MapField.FILLED));
         gameMap.setStaticObjects(new Coordinates(34, 2),new Grass(new Coordinates(34, 2), MapField.FILLED));

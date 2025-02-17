@@ -1,10 +1,7 @@
 package org.example.coordinates;
 
 import org.example.map.GameMap;
-import org.example.models.Creature;
-import org.example.models.Entity;
-import org.example.models.Rock;
-import org.example.models.Tree;
+import org.example.models.*;
 
 import java.util.Objects;
 import java.util.PrimitiveIterator;
@@ -47,7 +44,7 @@ public class Coordinates {
 
         Coordinates newCoordinates = new Coordinates(f, g);
         Entity entity = gameMap.getEntity(newCoordinates);
-        if (entity instanceof Rock || entity instanceof Tree) {
+        if (entity instanceof Rock || entity instanceof Predator) {
             return false; // Клетка занята препятствием
         }
 

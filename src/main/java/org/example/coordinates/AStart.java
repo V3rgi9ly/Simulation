@@ -2,6 +2,7 @@ package org.example.coordinates;
 
 import org.example.map.GameMap;
 import org.example.models.Entity;
+import org.example.models.Grass;
 
 import java.util.*;
 
@@ -45,6 +46,15 @@ public class AStart {
                 if (current.canShift(shift, gameMap)) {
                     Coordinates neighbor = current.shift(shift);
                     if (closedSet.contains(neighbor)) continue;
+                    Entity neighborEntity = gameMap.getEntity(neighbor);
+                    if (neighborEntity instanceof Grass && !neighbor.equals(goal)) {
+                        System.out.println("Клетка " + neighbor + " занята травой (не целью).");
+                        continue;
+                    }
+                    // Если клетка уже в закрытом списке, пропускаем её
+                    if (closedSet.contains(neighbor)) {
+                        continue;
+                    }
 
                     int tentativeGScore = gScore.getOrDefault(current, Integer.MAX_VALUE) + 1;
 
