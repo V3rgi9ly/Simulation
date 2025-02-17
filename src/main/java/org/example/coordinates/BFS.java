@@ -1,7 +1,6 @@
 package org.example.coordinates;
 
 import org.example.map.GameMap;
-import org.example.models.Creature;
 import org.example.models.Entity;
 
 import java.util.*;
@@ -29,7 +28,7 @@ public class BFS {
         Coordinates goal = creatureGoals.getCoordinates();
 
         gScore.put(start, 0);
-        fScore.put(start, heuristic(start, goal));
+        fScore.put(start, manhattanDistance(start, goal));
         openSet.add(start);
 
         while (!openSet.isEmpty()) {
@@ -51,7 +50,7 @@ public class BFS {
                     if (tentativeGScore < gScore.getOrDefault(neighbor, Integer.MAX_VALUE)) {
                         parentMap.put(neighbor, current);
                         gScore.put(neighbor, tentativeGScore);
-                        fScore.put(neighbor, tentativeGScore + heuristic(neighbor, goal));
+                        fScore.put(neighbor, tentativeGScore + manhattanDistance(neighbor, goal));
                         openSet.add(neighbor);
                     }
                 }
@@ -61,7 +60,7 @@ public class BFS {
         return Collections.emptyList(); // Если путь не найден
     }
 
-    private int heuristic(Coordinates a, Coordinates b) {
+    private int manhattanDistance(Coordinates a, Coordinates b) {
         return Math.abs(a.getX() - b.getX()) + Math.abs(a.getY() - b.getY()); // Манхэттенское расстояние
     }
 
