@@ -10,9 +10,8 @@ import java.util.*;
 
 public class Predator extends Creature {
 
-    private CoordinateService coordinateService;
-    public Predator(Integer speed, Integer health, Coordinates coordinates, MapField mapField, TargetAwareCoordinateService coordinateService) {
-        super(speed, health, mapField, coordinates, coordinateService);
+    public Predator(Integer speed, Integer health, MapField mapField, TargetAwareCoordinateService coordinateService) {
+        super(speed, health, mapField, coordinateService);
 
     }
 
@@ -48,6 +47,7 @@ public class Predator extends Creature {
             gameMap.getCoordinateService().releaseTarget(herbivore); // Освобождаем цель
         }
     }
+
 
     private boolean isAdjacent(Coordinates target){
         int dx=Math.abs(this.getCoordinates().getX()-target.getX());

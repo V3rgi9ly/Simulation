@@ -10,11 +10,9 @@ import java.util.List;
 
 public class Herbivore extends Creature {
 
-    private CoordinateService coordinateService;
 
-    public Herbivore(Integer speed, Integer health, Coordinates location, MapField mapField, TargetAwareCoordinateService coordinateService) {
-        super(speed, health, mapField, location, coordinateService);
-
+    public Herbivore(Integer speed, Integer health, MapField mapField, TargetAwareCoordinateService coordinateService) {
+        super(speed, health, mapField, coordinateService);
     }
 
 

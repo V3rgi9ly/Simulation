@@ -13,7 +13,7 @@ public abstract class Creature extends Entity  {
     protected final MapField mapField;
     protected int maxHealth;
 
-    protected Creature(Integer speed, Integer health, MapField mapField, Coordinates coordinates, TargetAwareCoordinateService coordinateService) {
+    protected Creature(Integer speed, Integer health, MapField mapField, TargetAwareCoordinateService coordinateService) {
         this.speed = speed;
         this.health = health;
         this.mapField = mapField;

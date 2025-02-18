@@ -6,8 +6,8 @@ import org.example.enums.MapField;
 
 public class Rock  extends EntityNotAlive {
 
-    public Rock(Coordinates coordinates, MapField mapField) {
-        super(mapField, coordinates);
+    public Rock( MapField mapField) {
+        super(mapField);
     }
 
 
