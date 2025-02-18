@@ -11,6 +11,7 @@ public abstract class Creature extends Entity  {
     protected Integer speed;
     protected Integer health;
     protected final MapField mapField;
+    protected int maxHealth;
 
     protected Creature(Integer speed, Integer health, MapField mapField, Coordinates coordinates, TargetAwareCoordinateService coordinateService) {
         this.speed = speed;
@@ -18,7 +19,6 @@ public abstract class Creature extends Entity  {
         this.mapField = mapField;
         this.coordinateService = coordinateService;
     }
-
 
     public abstract void makeMove(GameMap gameMap);
 
@@ -31,6 +31,7 @@ public abstract class Creature extends Entity  {
         if (this.health<=0){
             this.health=0;
         }
+
     }
 
     public boolean isAlive() {
@@ -56,5 +57,24 @@ public abstract class Creature extends Entity  {
                 coordinates.getY() >= 0 && coordinates.getY() < gameMap.getY();
     }
 
+    public int getHealth() {
+        return health;
+    }
 
+    protected void moveTowardsTarget(Entity target, GameMap gameMap) {
+        List<Coordinates> path = gameMap.getCoordinateService().getShortPath(this, target);
+
+        if (!path.isEmpty()) {
+            int steps = Math.min(this.speed, path.size());
+            for (int i = 0; i < steps; i++) {
+                Coordinates nextStep = path.get(i);
+                if (gameMap.isSquareEmpty(nextStep)) {
+                    gameMap.deleteEntity(this);
+                    this.setCoordinates(nextStep);
+                    gameMap.setStaticObjects(nextStep, this);
+                    break;
+                }
+            }
+        }
+    }
 }

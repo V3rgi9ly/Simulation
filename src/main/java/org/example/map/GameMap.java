@@ -27,7 +27,6 @@ public class GameMap {
         return coordinateService;
     }
 
-
     public Entity getEntity(Coordinates coordinates) {
         return map.get(coordinates);
     }
@@ -52,7 +51,6 @@ public class GameMap {
         }
 
         entity.setCoordinates(coordinates);
-
         map.put(coordinates, entity);
     }
 

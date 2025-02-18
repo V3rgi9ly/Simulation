@@ -22,9 +22,7 @@ public class MapConsoleRenderer {
 
             line += AppConf.Image.ANSI_RESET;
             System.out.println(line);
-
         }
-
     }
 
     private String getEmptySprite() {

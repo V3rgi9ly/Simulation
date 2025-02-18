@@ -14,7 +14,6 @@ public class Simulation {
 
     private final GameMap gameMap;
     private int counter = 0;
-    private boolean isPaused = false;
     private boolean isRunning = true;
 
     List<Action> iniActions;
@@ -69,7 +68,6 @@ public class Simulation {
         }
 
     }
-
 
     public void stopSimulation() {
         isRunning = false;
