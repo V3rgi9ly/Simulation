@@ -1,6 +1,6 @@
 package org.example.models;
 
-import org.example.TargetAwareCoordinateService;
+import org.example.service.TargetAwareCoordinateService;
 import org.example.coordinates.Coordinates;
 import org.example.map.GameMap;
 import org.example.enums.MapField;
@@ -20,7 +20,6 @@ public class Predator extends Creature {
     public void makeMove(GameMap gameMap) {
 
         if (!this.isAlive()){
-            System.out.println("Хищник мертв, не двигается.");
             return;
         }
         Entity target = gameMap.getCoordinateService().findAvailableHerbivore(this, gameMap.getGameMap());

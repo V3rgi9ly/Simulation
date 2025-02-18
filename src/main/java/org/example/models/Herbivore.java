@@ -1,14 +1,11 @@
 package org.example.models;
 
-import org.example.TargetAwareCoordinateService;
+import org.example.service.TargetAwareCoordinateService;
 import org.example.coordinates.Coordinates;
-import org.example.coordinates.CoordinatesShift;
 import org.example.map.GameMap;
 import org.example.enums.MapField;
 import org.example.service.CoordinateService;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Herbivore extends Creature {
@@ -25,7 +22,6 @@ public class Herbivore extends Creature {
     public void makeMove(GameMap gameMap) {
 
         if (!this.isAlive()) {
-            System.out.println("Травоядное мертво, не двигается.");
             return;
         }
 
@@ -52,7 +48,6 @@ public class Herbivore extends Creature {
         grass.setTaken(false); // Помечаем траву как съеденную
         gameMap.getCoordinateService().releaseTarget(grass); // Освобождаем цель
         this.health += 2; // Увеличиваем здоровье травоядного
-        System.out.println("Травоядное съело траву. Здоровье: " + this.health);
     }
 
     private void moveTowardsTarget(Entity target, GameMap gameMap) {

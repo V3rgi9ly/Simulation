@@ -1,11 +1,10 @@
-package org.example;
+package org.example.service;
 
 
 import org.example.coordinates.Coordinates;
 import org.example.models.Entity;
 import org.example.models.Grass;
 import org.example.models.Herbivore;
-import org.example.service.CoordinateService;
 
 import java.util.HashMap;
 import java.util.List;
@@ -17,10 +16,6 @@ public class TargetAwareCoordinateService {
 
     public TargetAwareCoordinateService(CoordinateService coordinateService) {
         this.coordinateService = coordinateService;
-    }
-
-    private boolean isTargetAvailable(Entity target) {
-        return !targetedEntities.containsKey(target);
     }
 
     private void setTargetAsTaken(Entity target, Entity creature) {

@@ -1,6 +1,6 @@
 package org.example.models;
 
-import org.example.TargetAwareCoordinateService;
+import org.example.service.TargetAwareCoordinateService;
 import org.example.coordinates.Coordinates;
 import org.example.coordinates.CoordinatesShift;
 import org.example.enums.MapField;
@@ -40,18 +40,20 @@ public abstract class Creature extends Entity  {
     protected void moveRandomly(GameMap gameMap) {
         List<CoordinatesShift> possibleMoves = new ArrayList<>(new CoordinatesShift().getCoordinatesShift());
         Collections.shuffle(possibleMoves); // Перемешиваем направления
-
-        for (CoordinatesShift shift : possibleMoves) {
+        for (CoordinatesShift shift : possibleMoves ) {
             Coordinates newCoordinates = this.getCoordinates().shift(shift);
-            if (gameMap.isSquareEmpty(newCoordinates)) { // Проверяем, свободна ли клетка
+            if (gameMap.isSquareEmpty(newCoordinates) && isWithinBounds(newCoordinates, gameMap) ) { // Проверяем, свободна ли клетка
                 gameMap.deleteEntity(this);
                 this.setCoordinates(newCoordinates);
                 gameMap.setStaticObjects(newCoordinates, this);
-                System.out.println("Травоядное случайно переместилось на " + newCoordinates);
                 return;
             }
         }
-        System.out.println("Травоядное не смогло найти свободное место для случайного движения.");
+    }
+
+    private boolean isWithinBounds(Coordinates coordinates, GameMap gameMap) {
+        return coordinates.getX() >= 0 && coordinates.getX() < gameMap.getX() &&
+                coordinates.getY() >= 0 && coordinates.getY() < gameMap.getY();
     }
 
 

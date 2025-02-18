@@ -1,6 +1,6 @@
 package org.example.map;
 
-import org.example.TargetAwareCoordinateService;
+import org.example.service.TargetAwareCoordinateService;
 import org.example.coordinates.Coordinates;
 import org.example.models.*;
 import org.example.service.CoordinateService;
@@ -13,14 +13,12 @@ public class GameMap {
     private final HashMap<Coordinates, Entity> map;
     private final Integer x;
     private final Integer y;
-    //    CoordinateService coordinateService;
     private final TargetAwareCoordinateService coordinateService;
 
     public GameMap() {
         this.x = AppConf.StartCoordinates.horizontal;
         this.y = AppConf.StartCoordinates.vertical;
         this.map = new HashMap<>();
-//        coordinateService = new CoordinateService(this);
         this.coordinateService = new TargetAwareCoordinateService(new CoordinateService(this));
 
     }
@@ -29,9 +27,6 @@ public class GameMap {
         return coordinateService;
     }
 
-//    public CoordinateService getCoordinateService() {
-//        return coordinateService;
-//    }
 
     public Entity getEntity(Coordinates coordinates) {
         return map.get(coordinates);

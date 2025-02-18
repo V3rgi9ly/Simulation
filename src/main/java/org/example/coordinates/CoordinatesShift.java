@@ -12,6 +12,8 @@ public class CoordinatesShift {
 
     private  Set<CoordinatesShift> coordinatesShift;
 
+
+
     public CoordinatesShift() {
         coordinatesShift=new HashSet<>(Arrays.asList(
                 new CoordinatesShift(1, 0),
