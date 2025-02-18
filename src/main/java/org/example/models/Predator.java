@@ -49,7 +49,7 @@ public class Predator extends Creature {
     private boolean isAdjacent(Coordinates target){
         int dx=Math.abs(this.getCoordinates().getX()-target.getX());
         int dy=Math.abs(this.getCoordinates().getY()-target.getY());
-        return (dx==0 && dy==0) || (dx<=1 && dy<=1);
+        return (dx==1 && dy==0) || (dx<=1 && dy<=0);
     }
 }
 

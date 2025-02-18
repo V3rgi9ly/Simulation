@@ -5,6 +5,9 @@ import org.example.coordinates.Coordinates;
 import org.example.map.GameMap;
 import org.example.models.*;
 
+import org.example.models.Entity;
+
+import java.util.Map;
 import java.util.*;
 
 public class CoordinateService {
@@ -62,5 +65,7 @@ public class CoordinateService {
     private double calculateDistance(Coordinates a, Coordinates b) {
         return Math.sqrt(Math.pow(a.getX() - b.getX(), 2) + Math.pow(a.getY() - b.getY(), 2));
     }
+
+
 
 }
