@@ -39,6 +39,7 @@ public class Simulation {
     public void nextTurn() {
 
         counter++;
+        System.out.println("=== Ход " + counter + " ===");
 
         for (Action action:turnActions){
             action.perform(gameMap);

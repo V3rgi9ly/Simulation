@@ -1,12 +1,14 @@
 package org.example.models;
 
 
+import org.example.TargetAwareCoordinateService;
 import org.example.coordinates.Coordinates;
 import org.example.enums.MapField;
 
 public abstract class Entity  {
     protected Coordinates coordinates;
     protected MapField mapField;
+    protected TargetAwareCoordinateService coordinateService;
 
     protected Entity() {
         this.mapField = mapField;

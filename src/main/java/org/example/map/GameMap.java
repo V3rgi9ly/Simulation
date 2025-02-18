@@ -1,5 +1,6 @@
 package org.example.map;
 
+import org.example.TargetAwareCoordinateService;
 import org.example.coordinates.Coordinates;
 import org.example.models.*;
 import org.example.service.CoordinateService;
@@ -12,18 +13,25 @@ public class GameMap {
     private final HashMap<Coordinates, Entity> map;
     private final Integer x;
     private final Integer y;
-    CoordinateService coordinateService;
+    //    CoordinateService coordinateService;
+    private final TargetAwareCoordinateService coordinateService;
 
     public GameMap() {
         this.x = AppConf.StartCoordinates.horizontal;
         this.y = AppConf.StartCoordinates.vertical;
         this.map = new HashMap<>();
-        coordinateService = new CoordinateService(this);
+//        coordinateService = new CoordinateService(this);
+        this.coordinateService = new TargetAwareCoordinateService(new CoordinateService(this));
+
     }
 
-    public CoordinateService getCoordinateService() {
+    public TargetAwareCoordinateService getCoordinateService() {
         return coordinateService;
     }
+
+//    public CoordinateService getCoordinateService() {
+//        return coordinateService;
+//    }
 
     public Entity getEntity(Coordinates coordinates) {
         return map.get(coordinates);
@@ -53,11 +61,11 @@ public class GameMap {
         map.put(coordinates, entity);
     }
 
-    public boolean hasAliveHerbivores(){
+    public boolean hasAliveHerbivores() {
         for (Entity entity : map.values()) {
-            if (entity instanceof Herbivore){
+            if (entity instanceof Herbivore) {
                 Herbivore herbivore = (Herbivore) entity;
-                if (herbivore.isAlive()){
+                if (herbivore.isAlive()) {
                     return true;
                 }
             }

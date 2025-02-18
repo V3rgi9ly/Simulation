@@ -36,7 +36,6 @@ public class AStart {
 
             if (current.equals(goal)) {
                 List<Coordinates> path = reconstructPath(parentMap, start, goal);
-//                return reconstructPath(parentMap, start, goal);
                 return path;
             }
 
@@ -66,8 +65,6 @@ public class AStart {
                 }
             }
         }
-
-        System.out.println("Путь не найден.");
         return Collections.emptyList(); // Если путь не найден
     }
 

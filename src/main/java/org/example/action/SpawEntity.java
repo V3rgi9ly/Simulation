@@ -1,5 +1,6 @@
 package org.example.action;
 
+import org.example.TargetAwareCoordinateService;
 import org.example.coordinates.Coordinates;
 import org.example.enums.MapField;
 import org.example.map.GameMap;
@@ -12,7 +13,7 @@ import org.example.service.CoordinateService;
 public class SpawEntity implements Action {
     @Override
     public void perform(GameMap gameMap) {
-        CoordinateService coordinateService=gameMap.getCoordinateService();
+        TargetAwareCoordinateService coordinateService = (TargetAwareCoordinateService) gameMap.getCoordinateService();
         gameMap.setStaticObjects(new Coordinates(31, 6),new Predator(2, 3, new Coordinates(31, 6), MapField.FILLED, coordinateService));
         gameMap.setStaticObjects( new Coordinates(21, 1),new Herbivore(3, 4, new Coordinates(21, 1), MapField.FILLED, coordinateService));
         gameMap.setStaticObjects(new Coordinates(14, 9),new Predator(2, 3, new Coordinates(14, 9), MapField.FILLED, coordinateService));
