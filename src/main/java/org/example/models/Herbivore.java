@@ -60,14 +60,10 @@ public class Herbivore extends Creature {
                     gameMap.deleteEntity(this);
                     this.setCoordinates(nextStep);
                     gameMap.setStaticObjects(nextStep, this);
-                    System.out.println("Травоядное переместилось на " + nextStep);
                     break;
-                } else {
-                    System.out.println("Клетка " + nextStep + " занята.");
                 }
             }
         }
-
     }
 
 
