@@ -7,4 +7,4 @@ The 2D world is an NxM matrix, each creature or object occupies an entire cell, 
 
 The project was implemented in accordance with the requirements set out in this course [RoadMap_SergeyZhukov](https://zhukovsd.github.io/java-backend-learning-course/projects/simulation/)
 
-Screenshot of the program ![screenshotoftheprogram](Simulatio/img.png)
+Screenshot of the program ![screenshotoftheprogram](https://i.imgur.com/44gBNNa.png)
