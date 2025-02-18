@@ -5,9 +5,10 @@ import org.example.coordinates.Coordinates;
 import org.example.coordinates.CoordinatesShift;
 import org.example.enums.MapField;
 import org.example.map.GameMap;
+
 import java.util.*;
 
-public abstract class Creature extends Entity  {
+public abstract class Creature extends Entity {
     protected Integer speed;
     protected Integer health;
     protected final MapField mapField;
@@ -17,6 +18,7 @@ public abstract class Creature extends Entity  {
         this.speed = speed;
         this.health = health;
         this.mapField = mapField;
+        this.maxHealth = health;
         this.coordinateService = coordinateService;
     }
 
@@ -28,22 +30,21 @@ public abstract class Creature extends Entity  {
 
     public void takeDamage(int damage) {
         this.health -= damage;
-        if (this.health<=0){
-            this.health=0;
+        if (this.health <= 0) {
+            this.health = 0;
         }
-
     }
 
     public boolean isAlive() {
-        return this.health>0;
+        return this.health > 0;
     }
 
     protected void moveRandomly(GameMap gameMap) {
         List<CoordinatesShift> possibleMoves = new ArrayList<>(new CoordinatesShift().getCoordinatesShift());
         Collections.shuffle(possibleMoves); // Перемешиваем направления
-        for (CoordinatesShift shift : possibleMoves ) {
+        for (CoordinatesShift shift : possibleMoves) {
             Coordinates newCoordinates = this.getCoordinates().shift(shift);
-            if (gameMap.isSquareEmpty(newCoordinates) && isWithinBounds(newCoordinates, gameMap) ) { // Проверяем, свободна ли клетка
+            if (gameMap.isSquareEmpty(newCoordinates) && isWithinBounds(newCoordinates, gameMap)) { // Проверяем, свободна ли клетка
                 gameMap.deleteEntity(this);
                 this.setCoordinates(newCoordinates);
                 gameMap.setStaticObjects(newCoordinates, this);
@@ -52,14 +53,6 @@ public abstract class Creature extends Entity  {
         }
     }
 
-    private boolean isWithinBounds(Coordinates coordinates, GameMap gameMap) {
-        return coordinates.getX() >= 0 && coordinates.getX() < gameMap.getX() &&
-                coordinates.getY() >= 0 && coordinates.getY() < gameMap.getY();
-    }
-
-    public int getHealth() {
-        return health;
-    }
 
     protected void moveTowardsTarget(Entity target, GameMap gameMap) {
         List<Coordinates> path = gameMap.getCoordinateService().getShortPath(this, target);
@@ -76,5 +69,10 @@ public abstract class Creature extends Entity  {
                 }
             }
         }
+    }
+
+    private boolean isWithinBounds(Coordinates coordinates, GameMap gameMap) {
+        return coordinates.getX() >= 0 && coordinates.getX() < gameMap.getX() &&
+                coordinates.getY() >= 0 && coordinates.getY() < gameMap.getY();
     }
 }

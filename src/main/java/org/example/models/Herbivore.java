@@ -25,7 +25,7 @@ public class Herbivore extends Creature {
 
         Entity target = gameMap.getCoordinateService().findAvailableGrass(this, gameMap.getGameMap());
 
-        if (target==null){
+        if (target == null) {
             moveRandomly(gameMap);
             return;
         }
@@ -42,14 +42,17 @@ public class Herbivore extends Creature {
     }
 
     private void eatGrass(Grass grass, GameMap gameMap) {
-        gameMap.deleteEntity(grass); // Удаляем траву с карты
-        grass.setTaken(false); // Помечаем траву как съеденную
-        gameMap.getCoordinateService().releaseTarget(grass); // Освобождаем цель
-        this.health += 2; // Увеличиваем здоровье травоядного
+        gameMap.deleteEntity(grass);
+        grass.setTaken(false);
+        gameMap.getCoordinateService().releaseTarget(grass);
+        this.health += 2;
+        if (this.maxHealth < this.health) {
+            this.health = this.maxHealth;
+        }
 
     }
 
-    private boolean isAdjacent (Coordinates target){
+    private boolean isAdjacent(Coordinates target) {
         int dx = Math.abs(this.getCoordinates().getX() - target.getX());
         int dy = Math.abs(this.getCoordinates().getY() - target.getY());
         return (dx == 0 && dy == 1) || (dx == 1 && dy == 0);

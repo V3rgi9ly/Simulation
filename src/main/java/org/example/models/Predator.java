@@ -12,29 +12,27 @@ public class Predator extends Creature {
 
     public Predator(Integer speed, Integer health, MapField mapField, TargetAwareCoordinateService coordinateService) {
         super(speed, health, mapField, coordinateService);
-
     }
 
     @Override
     public void makeMove(GameMap gameMap) {
 
-        if (!this.isAlive()){
+        if (!this.isAlive()) {
             return;
         }
         Entity target = gameMap.getCoordinateService().findAvailableHerbivore(this, gameMap.getGameMap());
 
-       if (target==null){
-           moveRandomly(gameMap);
-           return;
-       }
+        if (target == null) {
+            moveRandomly(gameMap);
+            return;
+        }
 
         if (target != null) {
             if (isAdjacent(target.getCoordinates())) {
                 if (target instanceof Herbivore) {
                     attackHerbivore((Herbivore) target, gameMap);
                 }
-            }
-            else {
+            } else {
                 moveTowardsTarget(target, gameMap);
             }
         }
@@ -49,10 +47,10 @@ public class Predator extends Creature {
     }
 
 
-    private boolean isAdjacent(Coordinates target){
-        int dx=Math.abs(this.getCoordinates().getX()-target.getX());
-        int dy=Math.abs(this.getCoordinates().getY()-target.getY());
-        return (dx==1 && dy==0) || (dx<=1 && dy<=0);
+    private boolean isAdjacent(Coordinates target) {
+        int dx = Math.abs(this.getCoordinates().getX() - target.getX());
+        int dy = Math.abs(this.getCoordinates().getY() - target.getY());
+        return (dx == 1 && dy == 0) || (dx <= 1 && dy <= 0);
     }
 }
 

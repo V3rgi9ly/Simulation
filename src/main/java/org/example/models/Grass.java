@@ -6,7 +6,7 @@ import org.example.enums.MapField;
 public class Grass extends EntityNotAlive {
     private boolean isTaken = false;
 
-    public Grass( MapField mapField) {
+    public Grass(MapField mapField) {
         super(mapField);
     }
 

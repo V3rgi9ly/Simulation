@@ -18,10 +18,6 @@ public class TargetAwareCoordinateService {
         this.coordinateService = coordinateService;
     }
 
-    private void setTargetAsTaken(Entity target, Entity creature) {
-        targetedEntities.put(target, creature);
-    }
-
     public void releaseTarget(Entity target) {
         targetedEntities.remove(target);
     }
@@ -69,11 +65,18 @@ public class TargetAwareCoordinateService {
 
         return nearestHerbivore;
     }
-    private double calculateDistance(Coordinates a, Coordinates b) {
-        return Math.sqrt(Math.pow(a.getX() - b.getX(), 2) + Math.pow(a.getY() - b.getY(), 2));
-    }
 
     public List<Coordinates> getShortPath(Entity entity, Entity target) {
         return coordinateService.getShortPath(entity, target);
     }
+
+    private double calculateDistance(Coordinates a, Coordinates b) {
+        return Math.sqrt(Math.pow(a.getX() - b.getX(), 2) + Math.pow(a.getY() - b.getY(), 2));
+    }
+
+    private void setTargetAsTaken(Entity target, Entity creature) {
+        targetedEntities.put(target, creature);
+    }
+
+
 }

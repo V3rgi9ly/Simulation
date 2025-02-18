@@ -24,7 +24,7 @@ public class Simulation {
     public Simulation(GameMap gameMap) {
         this.gameMap = gameMap;
         iniActions = new ArrayList<>();
-        turnActions=new ArrayList<>();
+        turnActions = new ArrayList<>();
     }
 
     public void setIniActions(Action action) {
@@ -40,7 +40,7 @@ public class Simulation {
         counter++;
         System.out.println("=== Ход " + counter + " ===");
 
-        for (Action action:turnActions){
+        for (Action action : turnActions) {
             action.perform(gameMap);
         }
         renderer.renderer(gameMap);
@@ -52,17 +52,17 @@ public class Simulation {
             action.perform(gameMap);
         }
 
-        while (true){
+        while (true) {
             nextTurn();
-            if (!gameMap.hasAliveHerbivores()){
+            if (!gameMap.hasAliveHerbivores()) {
                 System.out.println("Все травоядные умерли. Симуляция завершена.");
                 stopSimulation();
                 break;
             }
             System.out.println("\n");
-            try{
+            try {
                 Thread.sleep(1000);
-            }catch (InterruptedException e){
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }

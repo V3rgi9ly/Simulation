@@ -5,7 +5,7 @@ import org.example.service.TargetAwareCoordinateService;
 import org.example.coordinates.Coordinates;
 import org.example.enums.MapField;
 
-public abstract class Entity  {
+public abstract class Entity {
     protected Coordinates coordinates;
     protected MapField mapField;
     protected TargetAwareCoordinateService coordinateService;
@@ -25,8 +25,5 @@ public abstract class Entity  {
     public void setCoordinates(Coordinates coordinates) {
         this.coordinates = coordinates;
     }
-
-
-
 
 }
