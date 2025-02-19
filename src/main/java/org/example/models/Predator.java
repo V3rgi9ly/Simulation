@@ -39,10 +39,10 @@ public class Predator extends Creature {
     }
 
     private void attackHerbivore(Herbivore herbivore, GameMap gameMap) {
-        herbivore.takeDamage(1); // Наносим урон травоядному
+        herbivore.takeDamage(1);
         if (!herbivore.isAlive()) {
-            gameMap.deleteEntity(herbivore); // Удаляем травоядное с карты
-            gameMap.getCoordinateService().releaseTarget(herbivore); // Освобождаем цель
+            gameMap.deleteEntity(herbivore);
+            gameMap.getCoordinateService().releaseTarget(herbivore);
         }
     }
 

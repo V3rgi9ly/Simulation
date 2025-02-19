@@ -28,7 +28,7 @@ public class TargetAwareCoordinateService {
         double minDistance = Double.MAX_VALUE;
 
         for (Entity entity : map.values()) {
-            if (entity instanceof Grass && !((Grass) entity).isTaken()) { // Проверяем, не съедена ли трава
+            if (entity instanceof Grass && !((Grass) entity).isTaken()) {
                 double distance = calculateDistance(creature.getCoordinates(), entity.getCoordinates());
                 if (distance < minDistance) {
                     minDistance = distance;
@@ -38,7 +38,7 @@ public class TargetAwareCoordinateService {
         }
 
         if (nearestGrass != null) {
-            setTargetAsTaken(nearestGrass, creature); // Помечаем траву как занятую
+            setTargetAsTaken(nearestGrass, creature);
         }
 
         return nearestGrass;
@@ -50,7 +50,7 @@ public class TargetAwareCoordinateService {
         double minDistance = Double.MAX_VALUE;
 
         for (Entity entity : map.values()) {
-            if (entity instanceof Herbivore && ((Herbivore) entity).isAlive()) { // Проверяем, живое ли травоядное
+            if (entity instanceof Herbivore && ((Herbivore) entity).isAlive()) {
                 double distance = calculateDistance(creature.getCoordinates(), entity.getCoordinates());
                 if (distance < minDistance) {
                     minDistance = distance;
@@ -60,7 +60,7 @@ public class TargetAwareCoordinateService {
         }
 
         if (nearestHerbivore != null) {
-            setTargetAsTaken(nearestHerbivore, creature); // Помечаем травоядное как занятого
+            setTargetAsTaken(nearestHerbivore, creature);
         }
 
         return nearestHerbivore;

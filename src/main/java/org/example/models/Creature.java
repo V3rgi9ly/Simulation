@@ -41,10 +41,10 @@ public abstract class Creature extends Entity {
 
     protected void moveRandomly(GameMap gameMap) {
         List<CoordinatesShift> possibleMoves = new ArrayList<>(new CoordinatesShift().getCoordinatesShift());
-        Collections.shuffle(possibleMoves); // Перемешиваем направления
+        Collections.shuffle(possibleMoves);
         for (CoordinatesShift shift : possibleMoves) {
             Coordinates newCoordinates = this.getCoordinates().shift(shift);
-            if (gameMap.isSquareEmpty(newCoordinates) && isWithinBounds(newCoordinates, gameMap)) { // Проверяем, свободна ли клетка
+            if (gameMap.isSquareEmpty(newCoordinates) && isWithinBounds(newCoordinates, gameMap)) {
                 gameMap.deleteEntity(this);
                 this.setCoordinates(newCoordinates);
                 gameMap.setStaticObjects(newCoordinates, this);
