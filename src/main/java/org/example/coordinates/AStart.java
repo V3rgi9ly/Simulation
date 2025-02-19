@@ -49,7 +49,7 @@ public class AStart {
                     if (neighborEntity instanceof Grass && !neighbor.equals(goal)) {
                         continue;
                     }
-                    // Если клетка уже в закрытом списке, пропускаем её
+
                     if (closedSet.contains(neighbor)) {
                         continue;
                     }
@@ -65,11 +65,11 @@ public class AStart {
                 }
             }
         }
-        return Collections.emptyList(); // Если путь не найден
+        return Collections.emptyList();
     }
 
     private int manhattanDistance(Coordinates a, Coordinates b) {
-        return Math.abs(a.getX() - b.getX()) + Math.abs(a.getY() - b.getY()); // Манхэттенское расстояние
+        return Math.abs(a.getX() - b.getX()) + Math.abs(a.getY() - b.getY());
     }
 
     private List<Coordinates> reconstructPath(Map<Coordinates, Coordinates> parentMap, Coordinates start, Coordinates goal) {
